@@ -41,3 +41,7 @@ source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^I' autosuggest-accept
 
 bindkey '\e[C' complete-word
+
+
+export PATH=$PATH:$HOME/go/bin
+
