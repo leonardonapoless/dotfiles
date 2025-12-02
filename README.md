@@ -1,1 +1,1 @@
-macOS apps and terminal Apps config files
+macOS config files
