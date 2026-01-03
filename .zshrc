@@ -20,8 +20,11 @@ export EDITOR=nvim
 
 export PATH=$PATH:$HOME/go/bin
 
-export PATH="$PATH:/Users/leonardonapoles/.lmstudio/bin"
-
-export PATH="/Users/leonardonapoles/.antigravity/antigravity/bin:$PATH"
-
 source <(ng completion script)
+
+# bun completions
+[ -s "/Users/leonardonapoles/.bun/_bun" ] && source "/Users/leonardonapoles/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
