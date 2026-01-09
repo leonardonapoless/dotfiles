@@ -28,3 +28,4 @@ source <(ng completion script)
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+alias idea="open -na \"IntelliJ IDEA.app\" --args"
