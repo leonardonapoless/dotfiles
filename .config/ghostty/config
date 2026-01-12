@@ -1,0 +1,22 @@
+# --- Font and Theme ---
+font-family = "JetBrainsMono Nerd Font"
+font-size = 22
+#theme = "GruvboxDark"
+
+# --- macOS Native Feel & Window Chrome ---
+# This is the line that hides the title bar and buttons.
+window-decoration = "true"
+
+window-theme = "system"
+
+macos-titlebar-style = native
+
+#background-blur = true
+
+# --- Elegant Visuals ---
+# background-opacity = 0.55
+# window-padding-x = 0
+# window-padding-y = 0
+cursor-style = "bar"
+mouse-hide-while-typing = true
+
