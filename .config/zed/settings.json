@@ -12,8 +12,8 @@
     "model_parameters": [],
     "single_file_review": false
   },
-  "ui_font_size": 22,
-  "buffer_font_size": 22,
+  "ui_font_size": 18.0,
+  "buffer_font_size": 18.0,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "theme": {
     "mode": "system",
