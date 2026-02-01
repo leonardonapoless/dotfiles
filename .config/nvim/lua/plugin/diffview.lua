@@ -2,7 +2,7 @@
 return {
     'sindrets/diffview.nvim',
     config = function()
-        cmd("command! Diff DiffviewOpen")
+        vim.cmd("command! Diff DiffviewOpen")
     end,
     keys = {
         {'<leader>nd', ':DiffviewOpen<cr>', mode = 'n'}

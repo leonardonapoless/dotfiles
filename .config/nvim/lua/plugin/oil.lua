@@ -251,6 +251,9 @@ return {
             },
         })
 
+        -- Change directory color to neutral beige
+        vim.api.nvim_set_hl(0, "OilDir", { fg = "#ebdbb2", bold = true })
+
 
 
         vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

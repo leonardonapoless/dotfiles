@@ -1,4 +1,5 @@
 
+local km = vim.keymap.set
 
 local snacks_autocmd_group = vim.api.nvim_create_augroup("snacks_custom", {clear = true})
 vim.api.nvim_create_autocmd(
@@ -82,6 +83,25 @@ vim.api.nvim_create_autocmd(
                         delay = 70, -- delay in ms before using the repeat animation
                         duration = { step = 5, total = 50 },
                         easing = "linear",
+                    },
+                },
+                dashboard = {
+                    enabled = true,
+                    preset = {
+                        header = [[
+       NEVIM 
+      
+      Think Different.
+                        ]],
+                        keys = {
+                            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+                            { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                            { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+                            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                        },
                     },
                 },
             })

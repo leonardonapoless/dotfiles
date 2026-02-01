@@ -7,7 +7,27 @@ return {
     priority = 100,
     config = function()
         require'nvim-treesitter.configs'.setup {
-            ensure_installed = {"javascript","html","css","python", "go", "c", "lua", "vim", "vimdoc", "query","bash","json" },
+            ensure_installed = {
+                -- Existing
+                "javascript", "html", "css", "python", "go", "c", "lua", 
+                "vim", "vimdoc", "query", "bash", "json",
+                -- New: TypeScript/React
+                "typescript", "tsx",
+                -- New: Swift (iOS/macOS development)
+                "swift",
+                -- New: C++ (systems programming)
+                "cpp",
+                -- New: Odin (game dev / systems)
+                "odin",
+                -- New: Java
+                "java",
+                -- New: CSS preprocessors
+                "scss",
+                -- New: Better markdown
+                "markdown", "markdown_inline",
+                -- New: Config files
+                "toml", "yaml",
+            },
 
             sync_install = false,
             auto_install = true,

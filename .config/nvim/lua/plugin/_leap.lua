@@ -1,4 +1,6 @@
 
+local km = vim.keymap.set
+
 return {
     'ggandor/leap.nvim',
     dependencies = {'tpope/vim-repeat', 'tpope/vim-surround' },

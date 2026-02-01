@@ -1,4 +1,6 @@
 
+local km = vim.keymap.set
+
 return {
     'nanozuki/tabby.nvim',
     lazy = false,

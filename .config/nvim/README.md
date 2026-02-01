@@ -1,72 +1,84 @@
-# About
+# Neovim Configuration
 
-> This config is a work in progress.
+> **macOS-optimized IDE experience** with full language support for Swift, C/C++, Odin, TypeScript, React, Angular, JavaScript, HTML, CSS, and Java.
 
-> Made for Linux; other platforms might not work out of the box or may be incompatible.
-</br>
+## ✨ Features
 
+- **Gruvbox Material** dark colorscheme
+- **Native LSP** with intelligent code completion
+- **Debugging (DAP)** for C/C++, Swift, and JavaScript
+- **macOS keybindings** optimized for MacBook keyboards & Warp terminal
+- **Which-Key** for keybinding discovery
+- **Harpoon** for quick file switching
+- **Telescope** for fuzzy finding
 
-# Current state of things
-#### Linux
-- Everything is working as intended
+## 📖 Documentation
 
-#### Windows 10/11
-* WLS: everything works after configuring the clipboard (win32yank)
-* Native: some Linux specific features might not work (embedded shell commands, et cetera)
+- [**KEYBINDINGS.md**](doc/KEYBINDINGS.md) - Complete keybinding reference
+- [**LANGUAGES.md**](doc/LANGUAGES.md) - Language setup guide
 
-#### MacOS
-* All mappings that use `Alt` as a modifier key are incompatible and need to be changed
-* LSP servers managed by <a href='https://github.com/mason-org/mason.nvim'>Mason</a> are unstable
+---
 
-#### Android: <a href='https://github.com/termux/termux-app'>termux</a>
-* Some Mason LSP servers may not install<a href='https://github.com/mason-org/mason.nvim'>Mason</a>
-> Most Mason LSP server work now
-</br>
-* Clipboard does not work out of the box
+## 🚀 Quick Start
 
-## About GUI clients (Neovide, Nvim-QT, etc)
-- They are all untested
+### macOS Installation
 
-</br>
-
-# Installation
-
-- Clone this repo and place its files at the neovim folder. (Linux: ~/.config/nvim)
-- Be sure that the folder is empty beforehand
-
-> Linux/MacOS
 ```bash
-git clone https://github.com/bt-glv/nvim-config.git;
-cd nvim-config;
-mkdir -p ~/.config/nvim;
-mv .* ~/.config/nvim;
-cd ~/.config/nvim;
+# Clone the repo
+git clone <your-repo-url> ~/.config/nvim
+
+# Open Neovim and sync plugins
+nvim
+# Then run: :Lazy sync
 ```
 
-- Open Neovim; open the Lazy.nvim dashboard ```:Lazy``` and press ```S```.
+### Dependencies
 
-</br>
+Install with Homebrew:
 
-# Requirements
+```bash
+brew install neovim node npm ripgrep fd python
+brew install --cask font-jetbrains-mono-nerd-font
+```
 
-<h2>Neovim</h2>
-<h4>Version: 0.11.x</h4>
-&nbsp;
-<h2>Dependencies</h2>
-<ul>
-    <li><a href='https://www.nerdfonts.com/'>Pacthed Nerd Fonts Font</a> (For Dev-Icons)</li>
-    <li><a href='https://alacritty.org/'>Alacritty Terminal Emulator</a> (Can be replaced)</li>
-    <li>npm</li>
-    <li>node.js</li>
-    <li>ripgrep</li>
-    <li><a href='https://www.python.org/'>Phyton</a> 
-        <ul>
-            <li>PIP module: <a href='https://pypi.org/project/neovim-remote/'>neovim-remote</a> (Required for cmd line autocomplete)</li>
-        </ul>    
-    </li>
-    <li><a href='https://github.com/sharkdp/fd'>fd</a></li>
-    <li>C compiler: gcc; clang</li>
-</ul>
+For Swift support:
+```bash
+xcode-select --install
+```
 
+---
 
+## 🖥️ Platform Support
 
+| Platform | Status |
+|----------|--------|
+| **macOS** | ✅ Fully supported (primary platform) |
+| Linux | ✅ Supported |
+| Windows (WSL) | ⚠️ Clipboard setup required |
+
+---
+
+## ⌨️ Key Concepts
+
+- **Leader key**: `<Space>`
+- **LSP actions**: `<Space>l...`
+- **Find/Search**: `<Space>f...`
+- **Harpoon**: `<Space>h...` or `<Ctrl>1-9`
+- **Debugging**: `<F5>` to start, `<Space>d...` for actions
+
+Press `<Space>` and wait to see all available keybindings!
+
+---
+
+## 📁 Structure
+
+```
+~/.config/nvim/
+├── init.lua              # Entry point
+├── lua/
+│   ├── colorscheme/      # Gruvbox theme
+│   ├── lsp/              # LSP, completion, Mason
+│   ├── plugin/           # Plugin configs
+│   └── ui/               # UI components
+└── doc/                  # Documentation
+```

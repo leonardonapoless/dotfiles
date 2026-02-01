@@ -1,3 +1,5 @@
+local km = vim.keymap.set
+
 return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -29,9 +31,24 @@ return {
                     }
 
                 },
-            } -- End
-
+            }, -- End
         }
+
+        -- Transparency Polish: Remove Telescope Backgrounds
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            pattern = "*",
+            callback = function()
+                local hl = vim.api.nvim_set_hl
+                hl(0, "TelescopeNormal", { bg = "none" })
+                hl(0, "TelescopeBorder", { bg = "none" })
+                hl(0, "TelescopePromptNormal", { bg = "none" })
+                hl(0, "TelescopePromptBorder", { bg = "none" })
+                hl(0, "TelescopeResultsNormal", { bg = "none" })
+                hl(0, "TelescopeResultsBorder", { bg = "none" })
+                hl(0, "TelescopePreviewNormal", { bg = "none" })
+                hl(0, "TelescopePreviewBorder", { bg = "none" })
+            end,
+        })
 
         km("n", "<leader>ff", 	":Telescope find_files<CR>") 	-- finds a file and opens it
         km("n", "<leader>fl", 	":Telescope live_grep<CR>") 	-- finds files that contain the search

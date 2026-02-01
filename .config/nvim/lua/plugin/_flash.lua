@@ -1,4 +1,6 @@
 
+local km = vim.keymap.set
+
 return {
     'folke/flash.nvim',
     lazy = false,
