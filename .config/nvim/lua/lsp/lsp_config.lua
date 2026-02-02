@@ -166,9 +166,6 @@ return {
         -- Explicitly enable snippet support
         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-        -- Override default capabilities for all servers -- REMOVED
-        -- lspconfig.util.default_config = ...
-
         -- Diagnostic configuration for better visibility
         vim.diagnostic.config({
             virtual_text = {
