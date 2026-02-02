@@ -1,0 +1,40 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "agent": {
+    "enabled": false,
+    "model_parameters": [],
+    "single_file_review": false
+  },
+  "ui_font_size": 18.0,
+  "buffer_font_size": 18.0,
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Hacker Night Vision Dark"
+  },
+  "vim_mode": true,
+  // "show_code_actions_gutter_icon": false
+
+  "languages": {
+    "JavaScript": {
+      "format_on_save": "off",
+      "formatter": null
+    },
+    "TypeScript": {
+      "format_on_save": "off",
+      "formatter": null
+    },
+    "Go": {
+      "format_on_save": "off",
+      "formatter": null
+    }
+  }
+}

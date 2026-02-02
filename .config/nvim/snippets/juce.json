@@ -1,0 +1,426 @@
+{
+    "JUCE Audio Processor": {
+        "prefix": [
+            "juce_processor",
+            "AudioProcessor"
+        ],
+        "body": [
+            "class ${1:PluginName}AudioProcessor : public juce::AudioProcessor",
+            "{",
+            "public:",
+            "    ${1}AudioProcessor();",
+            "    ~${1}AudioProcessor() override;",
+            "",
+            "    void prepareToPlay(double sampleRate, int samplesPerBlock) override;",
+            "    void releaseResources() override;",
+            "",
+            "    bool isBusesLayoutSupported(const BusesLayout& layouts) const override;",
+            "",
+            "    void processBlock(juce::AudioBuffer<float>&, juce::MidiBuffer&) override;",
+            "",
+            "    juce::AudioProcessorEditor* createEditor() override;",
+            "    bool hasEditor() const override;",
+            "",
+            "    const juce::String getName() const override { return JucePlugin_Name; }",
+            "",
+            "    bool acceptsMidi() const override  { return false; }",
+            "    bool producesMidi() const override { return false; }",
+            "    bool isMidiEffect() const override { return false; }",
+            "    double getTailLengthSeconds() const override { return 0.0; }",
+            "",
+            "    int getNumPrograms() override { return 1; }",
+            "    int getCurrentProgram() override { return 0; }",
+            "    void setCurrentProgram(int) override {}",
+            "    const juce::String getProgramName(int) override { return {}; }",
+            "    void changeProgramName(int, const juce::String&) override {}",
+            "",
+            "    void getStateInformation(juce::MemoryBlock& destData) override;",
+            "    void setStateInformation(const void* data, int sizeInBytes) override;",
+            "",
+            "private:",
+            "    $0",
+            "    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(${1}AudioProcessor)",
+            "};"
+        ],
+        "description": "JUCE AudioProcessor class template"
+    },
+    "JUCE Audio Processor Editor": {
+        "prefix": [
+            "juce_editor",
+            "AudioProcessorEditor"
+        ],
+        "body": [
+            "class ${1:PluginName}AudioProcessorEditor : public juce::AudioProcessorEditor",
+            "{",
+            "public:",
+            "    explicit ${1}AudioProcessorEditor(${1}AudioProcessor&);",
+            "    ~${1}AudioProcessorEditor() override;",
+            "",
+            "    void paint(juce::Graphics&) override;",
+            "    void resized() override;",
+            "",
+            "private:",
+            "    ${1}AudioProcessor& audioProcessor;",
+            "",
+            "    $0",
+            "    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(${1}AudioProcessorEditor)",
+            "};"
+        ],
+        "description": "JUCE AudioProcessorEditor class template"
+    },
+    "JUCE Component": {
+        "prefix": [
+            "juce_component",
+            "Component"
+        ],
+        "body": [
+            "class ${1:ComponentName} : public juce::Component",
+            "{",
+            "public:",
+            "    ${1}();",
+            "    ~${1}() override = default;",
+            "",
+            "    void paint(juce::Graphics& g) override;",
+            "    void resized() override;",
+            "",
+            "private:",
+            "    $0",
+            "    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(${1})",
+            "};"
+        ],
+        "description": "JUCE Component class template"
+    },
+    "JUCE processBlock": {
+        "prefix": [
+            "juce_processblock",
+            "processBlock"
+        ],
+        "body": [
+            "void ${1:PluginName}AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,",
+            "                                                  juce::MidiBuffer& midiMessages)",
+            "{",
+            "    juce::ScopedNoDenormals noDenormals;",
+            "    auto totalNumInputChannels = getTotalNumInputChannels();",
+            "    auto totalNumOutputChannels = getTotalNumOutputChannels();",
+            "",
+            "    // Clear unused output channels",
+            "    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)",
+            "        buffer.clear(i, 0, buffer.getNumSamples());",
+            "",
+            "    // Process audio",
+            "    for (int channel = 0; channel < totalNumInputChannels; ++channel)",
+            "    {",
+            "        auto* channelData = buffer.getWritePointer(channel);",
+            "        for (int sample = 0; sample < buffer.getNumSamples(); ++sample)",
+            "        {",
+            "            $0",
+            "        }",
+            "    }",
+            "}"
+        ],
+        "description": "JUCE processBlock implementation"
+    },
+    "JUCE prepareToPlay": {
+        "prefix": [
+            "juce_prepare",
+            "prepareToPlay"
+        ],
+        "body": [
+            "void ${1:PluginName}AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)",
+            "{",
+            "    // Initialize DSP objects here",
+            "    $0",
+            "}"
+        ],
+        "description": "JUCE prepareToPlay implementation"
+    },
+    "JUCE Parameter Float": {
+        "prefix": [
+            "juce_param_float",
+            "AudioParameterFloat"
+        ],
+        "body": [
+            "std::make_unique<juce::AudioParameterFloat>(",
+            "    juce::ParameterID { \"${1:paramId}\", 1 },",
+            "    \"${2:Parameter Name}\",",
+            "    juce::NormalisableRange<float> { ${3:0.0f}, ${4:1.0f}, ${5:0.01f} },",
+            "    ${6:0.5f}",
+            ")"
+        ],
+        "description": "JUCE AudioParameterFloat"
+    },
+    "JUCE Parameter Choice": {
+        "prefix": [
+            "juce_param_choice",
+            "AudioParameterChoice"
+        ],
+        "body": [
+            "std::make_unique<juce::AudioParameterChoice>(",
+            "    juce::ParameterID { \"${1:paramId}\", 1 },",
+            "    \"${2:Parameter Name}\",",
+            "    juce::StringArray { ${3:\"Option1\", \"Option2\"} },",
+            "    ${4:0}",
+            ")"
+        ],
+        "description": "JUCE AudioParameterChoice"
+    },
+    "JUCE Parameter Bool": {
+        "prefix": [
+            "juce_param_bool",
+            "AudioParameterBool"
+        ],
+        "body": [
+            "std::make_unique<juce::AudioParameterBool>(",
+            "    juce::ParameterID { \"${1:paramId}\", 1 },",
+            "    \"${2:Parameter Name}\",",
+            "    ${3:false}",
+            ")"
+        ],
+        "description": "JUCE AudioParameterBool"
+    },
+    "JUCE APVTS": {
+        "prefix": [
+            "juce_apvts",
+            "AudioProcessorValueTreeState"
+        ],
+        "body": [
+            "juce::AudioProcessorValueTreeState apvts {",
+            "    *this, nullptr, \"Parameters\",",
+            "    {",
+            "        $0",
+            "    }",
+            "};"
+        ],
+        "description": "JUCE AudioProcessorValueTreeState"
+    },
+    "JUCE Slider Attachment": {
+        "prefix": [
+            "juce_slider_attach",
+            "SliderAttachment"
+        ],
+        "body": [
+            "std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> ${1:paramName}Attachment;",
+            "",
+            "// In constructor:",
+            "${1}Attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(",
+            "    audioProcessor.apvts, \"${2:paramId}\", ${1}Slider);"
+        ],
+        "description": "JUCE SliderAttachment for APVTS"
+    },
+    "JUCE dsp::ProcessSpec": {
+        "prefix": [
+            "juce_spec",
+            "ProcessSpec"
+        ],
+        "body": [
+            "juce::dsp::ProcessSpec spec;",
+            "spec.sampleRate = sampleRate;",
+            "spec.maximumBlockSize = static_cast<juce::uint32>(samplesPerBlock);",
+            "spec.numChannels = static_cast<juce::uint32>(getTotalNumOutputChannels());",
+            "$0"
+        ],
+        "description": "JUCE DSP ProcessSpec initialization"
+    },
+    "JUCE dsp::Gain": {
+        "prefix": [
+            "juce_gain",
+            "dsp::Gain"
+        ],
+        "body": [
+            "juce::dsp::Gain<float> ${1:gainProcessor};",
+            "",
+            "// In prepareToPlay:",
+            "${1}.prepare(spec);",
+            "${1}.setGainDecibels(${2:0.0f});",
+            "",
+            "// In processBlock:",
+            "juce::dsp::AudioBlock<float> block(buffer);",
+            "${1}.process(juce::dsp::ProcessContextReplacing<float>(block));"
+        ],
+        "description": "JUCE DSP Gain processor"
+    },
+    "JUCE dsp::IIR Filter": {
+        "prefix": [
+            "juce_iir",
+            "dsp::IIR"
+        ],
+        "body": [
+            "juce::dsp::ProcessorDuplicator<",
+            "    juce::dsp::IIR::Filter<float>,",
+            "    juce::dsp::IIR::Coefficients<float>> ${1:filter};",
+            "",
+            "// In prepareToPlay:",
+            "*${1}.state = *juce::dsp::IIR::Coefficients<float>::${2:makeLowPass}(",
+            "    sampleRate, ${3:1000.0f});",
+            "${1}.prepare(spec);"
+        ],
+        "description": "JUCE DSP IIR Filter"
+    },
+    "JUCE StateVariableTPTFilter": {
+        "prefix": [
+            "juce_svf",
+            "StateVariableTPTFilter"
+        ],
+        "body": [
+            "juce::dsp::StateVariableTPTFilter<float> ${1:filter};",
+            "",
+            "// In prepareToPlay:",
+            "${1}.prepare(spec);",
+            "${1}.setType(juce::dsp::StateVariableTPTFilterType::${2:lowpass});",
+            "${1}.setCutoffFrequency(${3:1000.0f});",
+            "${1}.setResonance(${4:0.707f});"
+        ],
+        "description": "JUCE DSP StateVariableTPTFilter"
+    },
+    "JUCE LookAndFeel v4": {
+        "prefix": [
+            "juce_lnf",
+            "LookAndFeel_V4"
+        ],
+        "body": [
+            "class ${1:CustomLookAndFeel} : public juce::LookAndFeel_V4",
+            "{",
+            "public:",
+            "    ${1}()",
+            "    {",
+            "        setColour(juce::Slider::thumbColourId, juce::Colour(${2:0xFF00FF00}));",
+            "        setColour(juce::Slider::trackColourId, juce::Colour(${3:0xFF333333}));",
+            "    }",
+            "",
+            "    void drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height,",
+            "                          float sliderPosProportional, float rotaryStartAngle,",
+            "                          float rotaryEndAngle, juce::Slider& slider) override",
+            "    {",
+            "        $0",
+            "    }",
+            "};"
+        ],
+        "description": "JUCE Custom LookAndFeel"
+    },
+    "JUCE CMakeLists.txt": {
+        "prefix": [
+            "juce_cmake",
+            "CMakeLists"
+        ],
+        "body": [
+            "cmake_minimum_required(VERSION 3.22)",
+            "",
+            "project(${1:PluginName} VERSION ${2:1.0.0})",
+            "",
+            "# Add JUCE",
+            "add_subdirectory(JUCE)",
+            "",
+            "# Create plugin target",
+            "juce_add_plugin(${1}",
+            "    COMPANY_NAME \"${3:YourCompany}\"",
+            "    IS_SYNTH FALSE",
+            "    NEEDS_MIDI_INPUT FALSE",
+            "    NEEDS_MIDI_OUTPUT FALSE",
+            "    IS_MIDI_EFFECT FALSE",
+            "    EDITOR_WANTS_KEYBOARD_FOCUS FALSE",
+            "    COPY_PLUGIN_AFTER_BUILD TRUE",
+            "    PLUGIN_MANUFACTURER_CODE ${4:Manu}",
+            "    PLUGIN_CODE ${5:Plug}",
+            "    FORMATS AU VST3 Standalone",
+            "    PRODUCT_NAME \"${1}\"",
+            ")",
+            "",
+            "# Generate compile_commands.json for clangd",
+            "set(CMAKE_EXPORT_COMPILE_COMMANDS ON)",
+            "",
+            "# Source files",
+            "target_sources(${1}",
+            "    PRIVATE",
+            "        Source/PluginProcessor.cpp",
+            "        Source/PluginEditor.cpp",
+            ")",
+            "",
+            "# JUCE modules",
+            "target_link_libraries(${1}",
+            "    PRIVATE",
+            "        juce::juce_audio_utils",
+            "        juce::juce_dsp",
+            "    PUBLIC",
+            "        juce::juce_recommended_config_flags",
+            "        juce::juce_recommended_lto_flags",
+            "        juce::juce_recommended_warning_flags",
+            ")"
+        ],
+        "description": "JUCE CMakeLists.txt template"
+    },
+    "JUCE Timer Callback": {
+        "prefix": [
+            "juce_timer",
+            "Timer"
+        ],
+        "body": [
+            "class ${1:ComponentName} : public juce::Component, public juce::Timer",
+            "{",
+            "public:",
+            "    ${1}() { startTimerHz(${2:30}); }",
+            "    ~${1}() override { stopTimer(); }",
+            "",
+            "    void timerCallback() override",
+            "    {",
+            "        $0",
+            "        repaint();",
+            "    }",
+            "};"
+        ],
+        "description": "JUCE Component with Timer"
+    },
+    "JUCE Async Updater": {
+        "prefix": [
+            "juce_async",
+            "AsyncUpdater"
+        ],
+        "body": [
+            "class ${1:ComponentName} : public juce::Component, public juce::AsyncUpdater",
+            "{",
+            "public:",
+            "    void handleAsyncUpdate() override",
+            "    {",
+            "        $0",
+            "    }",
+            "",
+            "    void triggerUpdate()",
+            "    {",
+            "        triggerAsyncUpdate();",
+            "    }",
+            "};"
+        ],
+        "description": "JUCE AsyncUpdater pattern"
+    },
+    "JUCE File Logger": {
+        "prefix": [
+            "juce_logger",
+            "FileLogger"
+        ],
+        "body": [
+            "#if JUCE_DEBUG",
+            "    juce::File logFile = juce::File::getSpecialLocation(",
+            "        juce::File::userDesktopDirectory).getChildFile(\"${1:PluginName}_log.txt\");",
+            "    std::unique_ptr<juce::FileLogger> logger = std::make_unique<juce::FileLogger>(",
+            "        logFile, \"${1} Debug Log\");",
+            "    juce::Logger::setCurrentLogger(logger.get());",
+            "#endif"
+        ],
+        "description": "JUCE FileLogger for debugging"
+    },
+    "JUCE jassert": {
+        "prefix": [
+            "jassert",
+            "assert"
+        ],
+        "body": "jassert(${1:condition});",
+        "description": "JUCE assertion"
+    },
+    "JUCE DBG": {
+        "prefix": [
+            "juce_dbg",
+            "DBG"
+        ],
+        "body": "DBG(\"${1:message}\");",
+        "description": "JUCE debug print"
+    }
+}
