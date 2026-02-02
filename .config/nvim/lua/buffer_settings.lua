@@ -1,87 +1,66 @@
+-- UI Display
+vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.showmode = false
+vim.opt.shortmess:append("sI")
 
+-- Indentation
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
 
---
--- # Default status line
---
-
-StatusLine = {
-	path_relative = function()
-
-		local full_path = vim.fn.expand('%:p')
-		if full_path == '' or full_path == nil then return '[Unnamed]' end
-
-		local buff_name = vim.fn.expand('%:t')
-		local buff_path = vim.fn.expand('%:p:h')
-		local cwd = vim.fn.getcwd()
-
-		if string.find(buff_path, '^'..cwd) then
-			local res = string.sub(buff_path, #cwd + 1)
-			res = (res == '' or nil) and './'..buff_name or '.'..res..'/'..buff_name
-			return res
-		end
-
-		if vim.b.current_syntax == 'oil' then
-			local res = vim.fn.substitute(buff_path, [[^oil:[/]\?[/]\?]],"","g") -- I dont think vim regex is needed here
-			res = vim.fn.substitute(res, "^"..vim.fn.expand('~'),'~','g')
-			return res
-		end
-
-		return full_path
-		--return buff_name
-	end,
-
-	lsp = function()
-		local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-		local clients = vim.lsp.get_clients()
-
-		if next(clients) == nil then return '' end
-
-		for _, client in ipairs(clients) do
-			local filetypes = client.config.filetypes
-			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-				return client.name
-				--return ' '..client.name
-			end
-		end
-
-		return ''
-	end,
-}
---:help statusline
-vim.opt.statusline = "%{v:lua.StatusLine.path_relative()} %w%h%m%r%= %{v:lua.StatusLine.lsp()} %l:%c %P "
-
-
-
---
--- # Buffer Settings
---
-
-vim.g.netrw_bufsettings='noma nomod nu nobl nowrap ro'
--- Relative line numbers in netrw
--- what the hell is this even supposed to mean?
-
-vim.opt.termguicolors=true
-vim.opt.rnu = true
-vim.opt.nu = true
+-- Text display
 vim.opt.linebreak = true
 vim.opt.breakindent = true
-vim.opt.signcolumn = "no"
-vim.opt.tabstop = 4 -- Defines indent spacing
-vim.opt.shiftwidth = 4
-vim.opt.scrolloff = 4
+vim.opt.wrap = false
+
+-- Scrolling & Performance
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 vim.opt.updatetime = 50
+vim.opt.timeoutlen = 300
 
--- When a tab is closed, go to previous tab
--- (overrides default behaviour: go to next tab)
---local group = vim.api.nvim_create_augroup('__temp', { clear = true })
---vim.api.nvim_create_autocmd(
-	--{
-		--"TabClosed"
-	--},
-	--{
-		--group = group,
-		--pattern = "*",
-		--command = "tabprevious",
-	--}
---)
+-- Persistent undo
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
 
+-- Search behavior
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+
+-- Split behavior
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- Clipboard (macOS integration via pbcopy/pbpaste)
+vim.opt.clipboard = "unnamedplus"
+
+-- Completion
+vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.pumheight = 10
+
+-- File handling
+vim.opt.backup = false
+vim.opt.swapfile = false
+vim.opt.fileencoding = "utf-8"
+
+-- Netrw settings
+vim.g.netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+
+-- Disable some built-in plugins for performance
+local disabled_built_ins = {
+	"gzip", "zip", "zipPlugin", "tar", "tarPlugin",
+	"getscript", "getscriptPlugin", "vimball", "vimballPlugin",
+	"2html_plugin", "logipat", "rrhelper", "spellfile_plugin",
+}
+for _, plugin in pairs(disabled_built_ins) do
+	vim.g["loaded_" .. plugin] = 1
+end

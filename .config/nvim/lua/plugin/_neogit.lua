@@ -1,16 +1,28 @@
-
 return {
-    "NeogitOrg/neogit",
-    cmd = { "Neogit", "Ng" },
-    keys = { {"<leader>ng", ":Neogit<cr>", "n"} },
-    dependencies = {
-        "nvim-lua/plenary.nvim",         -- required
-        "sindrets/diffview.nvim",        -- optional - Diff integration
-        "nvim-telescope/telescope.nvim", -- optional
-    },
-    config = function()
-        vim.cmd("command! Neog Neogit")
-        require("neogit").setup {
+	"NeogitOrg/neogit",
+	cmd = { "Neogit", "Ng" },
+	keys = {
+		{
+			"<leader>gg",
+			function()
+				local cwd = vim.fn.getcwd()
+				if vim.bo.filetype == "oil" then
+					local oil = require("oil")
+					cwd = oil.get_current_dir() or cwd
+				end
+				require("neogit").open({ cwd = cwd })
+			end,
+			desc = "Neogit: Open Status"
+		},
+	},
+	dependencies = {
+		"nvim-lua/plenary.nvim",   -- required
+		"sindrets/diffview.nvim",  -- optional - Diff integration
+		"nvim-telescope/telescope.nvim", -- optional
+	},
+	config = function()
+		vim.cmd("command! Neog Neogit")
+		require("neogit").setup {
 			disable_relative_line_numbers = false,
 			disable_line_numbers = false,
 			integrations = {

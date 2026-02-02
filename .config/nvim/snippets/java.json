@@ -1,0 +1,668 @@
+{
+    "Java Main Method": {
+        "prefix": [
+            "main",
+            "psvm"
+        ],
+        "body": [
+            "public static void main(String[] args) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java main method"
+    },
+    "Java Class": {
+        "prefix": [
+            "class",
+            "java_class"
+        ],
+        "body": [
+            "public class ${1:ClassName} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java class"
+    },
+    "Java Interface": {
+        "prefix": [
+            "interface",
+            "java_interface"
+        ],
+        "body": [
+            "public interface ${1:InterfaceName} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java interface"
+    },
+    "Java Record (Java 14+)": {
+        "prefix": [
+            "record",
+            "java_record"
+        ],
+        "body": [
+            "public record ${1:RecordName}(${2:String field1}, ${3:int field2}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java record (immutable data class)"
+    },
+    "Java Enum": {
+        "prefix": [
+            "enum",
+            "java_enum"
+        ],
+        "body": [
+            "public enum ${1:EnumName} {",
+            "    ${2:VALUE1}, ${3:VALUE2};",
+            "    $0",
+            "}"
+        ],
+        "description": "Java enum"
+    },
+    "Java Sealed Class (Java 17+)": {
+        "prefix": [
+            "sealed",
+            "sealed_class"
+        ],
+        "body": [
+            "public sealed class ${1:ClassName} permits ${2:SubClass1}, ${3:SubClass2} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java sealed class"
+    },
+    "Java Constructor": {
+        "prefix": [
+            "ctor",
+            "constructor"
+        ],
+        "body": [
+            "public ${1:ClassName}(${2:params}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java constructor"
+    },
+    "Java Getter": {
+        "prefix": [
+            "get",
+            "getter"
+        ],
+        "body": [
+            "public ${1:Type} get${2:FieldName}() {",
+            "    return ${3:fieldName};",
+            "}"
+        ],
+        "description": "Java getter method"
+    },
+    "Java Setter": {
+        "prefix": [
+            "set",
+            "setter"
+        ],
+        "body": [
+            "public void set${1:FieldName}(${2:Type} ${3:fieldName}) {",
+            "    this.${3} = ${3};",
+            "}"
+        ],
+        "description": "Java setter method"
+    },
+    "Java toString": {
+        "prefix": [
+            "tostring",
+            "tostr"
+        ],
+        "body": [
+            "@Override",
+            "public String toString() {",
+            "    return \"${1:ClassName}{\" +",
+            "            \"${2:field}=\" + ${2} +",
+            "            '}';",
+            "}"
+        ],
+        "description": "Java toString method"
+    },
+    "Java equals and hashCode": {
+        "prefix": [
+            "equals",
+            "equalhash"
+        ],
+        "body": [
+            "@Override",
+            "public boolean equals(Object o) {",
+            "    if (this == o) return true;",
+            "    if (o == null || getClass() != o.getClass()) return false;",
+            "    ${1:ClassName} that = (${1}) o;",
+            "    return Objects.equals(${2:field}, that.${2});",
+            "}",
+            "",
+            "@Override",
+            "public int hashCode() {",
+            "    return Objects.hash(${2});",
+            "}"
+        ],
+        "description": "Java equals and hashCode methods"
+    },
+    "Java Try-Catch": {
+        "prefix": [
+            "try",
+            "trycatch"
+        ],
+        "body": [
+            "try {",
+            "    $0",
+            "} catch (${1:Exception} e) {",
+            "    ${2:e.printStackTrace();}",
+            "}"
+        ],
+        "description": "Java try-catch block"
+    },
+    "Java Try-With-Resources": {
+        "prefix": [
+            "tryres",
+            "try_resources"
+        ],
+        "body": [
+            "try (${1:Resource} ${2:resource} = new ${1}()) {",
+            "    $0",
+            "} catch (${3:Exception} e) {",
+            "    ${4:e.printStackTrace();}",
+            "}"
+        ],
+        "description": "Java try-with-resources"
+    },
+    "Java For Loop": {
+        "prefix": [
+            "fori",
+            "for"
+        ],
+        "body": [
+            "for (int ${1:i} = 0; ${1} < ${2:length}; ${1}++) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java for loop"
+    },
+    "Java Enhanced For Loop": {
+        "prefix": [
+            "fore",
+            "foreach"
+        ],
+        "body": [
+            "for (${1:Type} ${2:item} : ${3:collection}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java enhanced for loop"
+    },
+    "Java If Statement": {
+        "prefix": [
+            "if",
+            "ifst"
+        ],
+        "body": [
+            "if (${1:condition}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java if statement"
+    },
+    "Java If-Else": {
+        "prefix": [
+            "ifelse",
+            "ife"
+        ],
+        "body": [
+            "if (${1:condition}) {",
+            "    ${2}",
+            "} else {",
+            "    $0",
+            "}"
+        ],
+        "description": "Java if-else statement"
+    },
+    "Java Switch Expression (Java 14+)": {
+        "prefix": [
+            "switch",
+            "switch_expr"
+        ],
+        "body": [
+            "var ${1:result} = switch (${2:value}) {",
+            "    case ${3:CASE1} -> ${4:value1};",
+            "    case ${5:CASE2} -> ${6:value2};",
+            "    default -> ${7:defaultValue};",
+            "};"
+        ],
+        "description": "Java switch expression"
+    },
+    "Java Pattern Matching Switch (Java 21+)": {
+        "prefix": [
+            "switch_pattern",
+            "pattern_switch"
+        ],
+        "body": [
+            "switch (${1:obj}) {",
+            "    case ${2:String} s -> System.out.println(\"String: \" + s);",
+            "    case ${3:Integer} i -> System.out.println(\"Integer: \" + i);",
+            "    case null -> System.out.println(\"Null\");",
+            "    default -> System.out.println(\"Other\");",
+            "}"
+        ],
+        "description": "Java pattern matching switch"
+    },
+    "Java Lambda": {
+        "prefix": [
+            "lambda",
+            "lam"
+        ],
+        "body": "(${1:params}) -> ${2:expression}",
+        "description": "Java lambda expression"
+    },
+    "Java Method Reference": {
+        "prefix": [
+            "methodref",
+            "mref"
+        ],
+        "body": "${1:Class}::${2:method}",
+        "description": "Java method reference"
+    },
+    "Java Stream Map": {
+        "prefix": [
+            "stream_map",
+            "smap"
+        ],
+        "body": [
+            "${1:list}.stream()",
+            "    .map(${2:item} -> ${3:item.transform()})",
+            "    .collect(Collectors.toList());"
+        ],
+        "description": "Java stream map operation"
+    },
+    "Java Stream Filter": {
+        "prefix": [
+            "stream_filter",
+            "sfilter"
+        ],
+        "body": [
+            "${1:list}.stream()",
+            "    .filter(${2:item} -> ${3:item.condition()})",
+            "    .collect(Collectors.toList());"
+        ],
+        "description": "Java stream filter operation"
+    },
+    "Java Stream Reduce": {
+        "prefix": [
+            "stream_reduce",
+            "sreduce"
+        ],
+        "body": [
+            "${1:list}.stream()",
+            "    .reduce(${2:identity}, (${3:a}, ${4:b}) -> ${5:a + b});"
+        ],
+        "description": "Java stream reduce operation"
+    },
+    "Java Optional": {
+        "prefix": [
+            "optional",
+            "opt"
+        ],
+        "body": [
+            "Optional<${1:Type}> ${2:optional} = Optional.ofNullable(${3:value});",
+            "${2}.ifPresent(${4:v} -> $0);"
+        ],
+        "description": "Java Optional"
+    },
+    "Java List": {
+        "prefix": [
+            "list",
+            "arraylist"
+        ],
+        "body": "List<${1:Type}> ${2:list} = new ArrayList<>();",
+        "description": "Java ArrayList"
+    },
+    "Java Set": {
+        "prefix": [
+            "set",
+            "hashset"
+        ],
+        "body": "Set<${1:Type}> ${2:set} = new HashSet<>();",
+        "description": "Java HashSet"
+    },
+    "Java Map": {
+        "prefix": [
+            "map",
+            "hashmap"
+        ],
+        "body": "Map<${1:KeyType}, ${2:ValueType}> ${3:map} = new HashMap<>();",
+        "description": "Java HashMap"
+    },
+    "Java Immutable List (Java 9+)": {
+        "prefix": [
+            "listof",
+            "immutable_list"
+        ],
+        "body": "List<${1:Type}> ${2:list} = List.of(${3:elements});",
+        "description": "Java immutable list"
+    },
+    "Java Immutable Map (Java 9+)": {
+        "prefix": [
+            "mapof",
+            "immutable_map"
+        ],
+        "body": "Map<${1:K}, ${2:V}> ${3:map} = Map.of(${4:key1}, ${5:value1}, ${6:key2}, ${7:value2});",
+        "description": "Java immutable map"
+    },
+    "Java JUnit 5 Test": {
+        "prefix": [
+            "test",
+            "junit_test"
+        ],
+        "body": [
+            "@Test",
+            "void ${1:testMethodName}() {",
+            "    // Given",
+            "    ${2}",
+            "    ",
+            "    // When",
+            "    ${3}",
+            "    ",
+            "    // Then",
+            "    ${4:assertEquals(expected, actual);}",
+            "}"
+        ],
+        "description": "JUnit 5 test method"
+    },
+    "Java JUnit 5 BeforeEach": {
+        "prefix": [
+            "beforeeach",
+            "setup"
+        ],
+        "body": [
+            "@BeforeEach",
+            "void setUp() {",
+            "    $0",
+            "}"
+        ],
+        "description": "JUnit 5 BeforeEach"
+    },
+    "Java JUnit 5 ParameterizedTest": {
+        "prefix": [
+            "paramtest",
+            "parameterized"
+        ],
+        "body": [
+            "@ParameterizedTest",
+            "@ValueSource(${1:strings} = {${2:\"value1\", \"value2\"}})",
+            "void ${3:testMethodName}(${4:String} ${5:param}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "JUnit 5 parameterized test"
+    },
+    "Java Mockito Mock": {
+        "prefix": [
+            "mock",
+            "mockito"
+        ],
+        "body": [
+            "@Mock",
+            "private ${1:Type} ${2:mock};",
+            "",
+            "@BeforeEach",
+            "void setUp() {",
+            "    MockitoAnnotations.openMocks(this);",
+            "}"
+        ],
+        "description": "Mockito mock setup"
+    },
+    "Java Mockito When-Then": {
+        "prefix": [
+            "when",
+            "mockito_when"
+        ],
+        "body": "when(${1:mock}.${2:method}(${3:args})).thenReturn(${4:value});",
+        "description": "Mockito when-then"
+    },
+    "Java Mockito Verify": {
+        "prefix": [
+            "verify",
+            "mockito_verify"
+        ],
+        "body": "verify(${1:mock}, ${2:times(1)}).${3:method}(${4:args});",
+        "description": "Mockito verify"
+    },
+    "Java Logger": {
+        "prefix": [
+            "logger",
+            "log"
+        ],
+        "body": "private static final Logger logger = LoggerFactory.getLogger(${1:ClassName}.class);",
+        "description": "SLF4J Logger"
+    },
+    "Java Log Info": {
+        "prefix": [
+            "loginfo",
+            "logi"
+        ],
+        "body": "logger.info(\"${1:message}\", ${2:args});",
+        "description": "Log info message"
+    },
+    "Java Log Debug": {
+        "prefix": [
+            "logdebug",
+            "logd"
+        ],
+        "body": "logger.debug(\"${1:message}\", ${2:args});",
+        "description": "Log debug message"
+    },
+    "Java Log Error": {
+        "prefix": [
+            "logerror",
+            "loge"
+        ],
+        "body": "logger.error(\"${1:message}\", ${2:e});",
+        "description": "Log error message"
+    },
+    "Java Spring @Autowired": {
+        "prefix": [
+            "autowired",
+            "inject"
+        ],
+        "body": [
+            "@Autowired",
+            "private ${1:Type} ${2:field};"
+        ],
+        "description": "Spring @Autowired"
+    },
+    "Java Spring @Service": {
+        "prefix": [
+            "service",
+            "spring_service"
+        ],
+        "body": [
+            "@Service",
+            "public class ${1:ServiceName} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Spring @Service class"
+    },
+    "Java Spring @RestController": {
+        "prefix": [
+            "restcontroller",
+            "rest"
+        ],
+        "body": [
+            "@RestController",
+            "@RequestMapping(\"${1:/api}\")",
+            "public class ${2:ControllerName} {",
+            "    $0",
+            "}"
+        ],
+        "description": "Spring @RestController"
+    },
+    "Java Spring @GetMapping": {
+        "prefix": [
+            "getmapping",
+            "get"
+        ],
+        "body": [
+            "@GetMapping(\"${1:/path}\")",
+            "public ${2:ResponseEntity<?>} ${3:methodName}() {",
+            "    $0",
+            "}"
+        ],
+        "description": "Spring @GetMapping"
+    },
+    "Java Spring @PostMapping": {
+        "prefix": [
+            "postmapping",
+            "post"
+        ],
+        "body": [
+            "@PostMapping(\"${1:/path}\")",
+            "public ${2:ResponseEntity<?>} ${3:methodName}(@RequestBody ${4:Type} ${5:body}) {",
+            "    $0",
+            "}"
+        ],
+        "description": "Spring @PostMapping"
+    },
+    "Java Spring @Entity": {
+        "prefix": [
+            "entity",
+            "jpa_entity"
+        ],
+        "body": [
+            "@Entity",
+            "@Table(name = \"${1:table_name}\")",
+            "public class ${2:EntityName} {",
+            "    ",
+            "    @Id",
+            "    @GeneratedValue(strategy = GenerationType.${3:IDENTITY})",
+            "    private Long id;",
+            "    ",
+            "    $0",
+            "}"
+        ],
+        "description": "JPA @Entity"
+    },
+    "Java CompletableFuture": {
+        "prefix": [
+            "completable",
+            "async"
+        ],
+        "body": [
+            "CompletableFuture.supplyAsync(() -> {",
+            "    return ${1:value};",
+            "}).thenApply(${2:result} -> {",
+            "    $0",
+            "    return ${2};",
+            "}).exceptionally(${3:e} -> {",
+            "    ${3}.printStackTrace();",
+            "    return null;",
+            "});"
+        ],
+        "description": "Java CompletableFuture"
+    },
+    "Java Var (Java 10+)": {
+        "prefix": [
+            "var"
+        ],
+        "body": "var ${1:name} = ${2:value};",
+        "description": "Java var type inference"
+    },
+    "Java Text Block (Java 15+)": {
+        "prefix": [
+            "textblock",
+            "multiline"
+        ],
+        "body": [
+            "String ${1:text} = \"\"\"",
+            "    ${2:content}",
+            "    \"\"\";"
+        ],
+        "description": "Java text block"
+    },
+    "Java System.out.println": {
+        "prefix": [
+            "sout",
+            "println"
+        ],
+        "body": "System.out.println(${1:\"message\"});",
+        "description": "System.out.println"
+    },
+    "Java System.out.printf": {
+        "prefix": [
+            "soutf",
+            "printf"
+        ],
+        "body": "System.out.printf(\"${1:%s}\\n\", ${2:args});",
+        "description": "System.out.printf"
+    },
+    "Java Assertion": {
+        "prefix": [
+            "assert",
+            "assertion"
+        ],
+        "body": "assert ${1:condition} : \"${2:message}\";",
+        "description": "Java assertion"
+    },
+    "Java Singleton Pattern": {
+        "prefix": [
+            "singleton",
+            "singleton_pattern"
+        ],
+        "body": [
+            "public class ${1:Singleton} {",
+            "    private static ${1} instance;",
+            "    ",
+            "    private ${1}() {}",
+            "    ",
+            "    public static synchronized ${1} getInstance() {",
+            "        if (instance == null) {",
+            "            instance = new ${1}();",
+            "        }",
+            "        return instance;",
+            "    }",
+            "    ",
+            "    $0",
+            "}"
+        ],
+        "description": "Java Singleton pattern"
+    },
+    "Java Builder Pattern": {
+        "prefix": [
+            "builder",
+            "builder_pattern"
+        ],
+        "body": [
+            "public static class Builder {",
+            "    private ${1:Type} ${2:field};",
+            "    ",
+            "    public Builder ${2}(${1} ${2}) {",
+            "        this.${2} = ${2};",
+            "        return this;",
+            "    }",
+            "    ",
+            "    public ${3:ClassName} build() {",
+            "        return new ${3}(this);",
+            "    }",
+            "}"
+        ],
+        "description": "Java Builder pattern"
+    },
+    "Java Functional Interface": {
+        "prefix": [
+            "functional",
+            "functional_interface"
+        ],
+        "body": [
+            "@FunctionalInterface",
+            "public interface ${1:InterfaceName} {",
+            "    ${2:void} ${3:method}(${4:params});",
+            "}"
+        ],
+        "description": "Java functional interface"
+    }
+}

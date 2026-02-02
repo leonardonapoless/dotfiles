@@ -1,26 +1,29 @@
-
-
 --------
+
 ## get current directory
+
 lua print(vim.fn.getcwd())
 
 ---------
+
 ## execute shell commands
 
 #### Lua way of doing it (silently)
+
 ```lua
 vim.fn.system("your-bash-command")
 ```
+
 > this one is platform agnostic
 
-
 #### "vimscript" way of doing it
+
 ```lua
 vim.cmd('!ls')
 ```
 
-
 ---------
+
 ## file path
 
 ```lua
@@ -32,39 +35,39 @@ local filepath = vim.fn.expand('%:p')
 
 ```
 
-
-
 ---------
+
 ## Get project path
+
 vim.fn.getcwd()
 
-
-
 ---------
+
 ## Get buffer number
+
 vim.api.nvim_get_current_buf()
 
-
-
 ---------
+
 ## Get buffer name
+
 vim.api.nvim_buf_get_name(bufnr)
 vim.api.nvim_buf_get_name(0) -- For current buffer
 
-0 -> THIS BUFNR ALWAYS REFFERS TO THE CURRENT BUFFER 
-
+0 -> THIS BUFNR ALWAYS REFFERS TO THE CURRENT BUFFER
 
 ---------
-## Remap repeat count variable 
+
+## Remap repeat count variable
+> >>
 > >> Test this later
 > Detecting if a remap is being executed multiple times or not
 
 Just make use of this variable:
 vim.v.count
 
-
-
 ---------
+
 ## feed keys
 
 This function executes in parallel with your code unless specified not to.
@@ -76,7 +79,6 @@ vim.api.nvim_feedkeys(keys::string,mode::string,replace_term_codes::boolean)
 > Example
 vim.api.nvim_feedkeys("q:","xn",false)
 
-
 ### modes
 
 > Modes can be used in combination with one another
@@ -87,11 +89,10 @@ t       -> keys will be handled as if they where typed
 n       -> ""do not remap keys""
 
 > More about:
-> https://neovim.io/doc/user/builtin.html#feedkeys()
-
-
+> <https://neovim.io/doc/user/builtin.html#feedkeys()>
 
 ----------
+
 ## search and replace using vim
 
 vim.fn.substitute()
@@ -101,12 +102,51 @@ Example:
 pick = vim.fn.substitute(pick, [[[/][^/]\+$]], "", "g" )
 
 ----------
+
 ## match lua string with vim regex
 
 (vim.fn.match(<String>, <vim regex pattern>) ~= -1)
 > this will return true or false if there is a match within the string
 
 #### Example
+
 vim.fn.match(bufname, '[[]Command Line[]]$') ~= -1)
 
+---------
 
+## Custom Utility Functions
+
+### Block Indent
+
+`Block_indent()`
+> Indents visual block selection to align with a specific character.
+
+### Manual Surround
+
+`Manual_surround()`
+> Surrounds selection with simple characters (parentheses, brackets, etc).
+
+### Restart LSP
+
+`RestartLspServers()`
+> Restarts all active LSP clients.
+
+### Open Terminal
+
+`openTerminal(path)`
+> Opens Warp terminal at the specified path (macOS).
+
+### Open Neovim
+
+`openNeovim(path)`
+> Opens a new Neovim instance in a Warp terminal at the specified path.
+
+### Clear Terminal
+
+`ClearTerm(reset)`
+> Clears the terminal buffer.
+
+### Notify
+
+`Notify(msg, priority, opts)`
+> Custom notification wrapper around snacks.nvim.

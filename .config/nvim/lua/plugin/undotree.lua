@@ -1,4 +1,3 @@
-
 return {
 	'mbbill/undotree',
 	lazy = true,
@@ -10,7 +9,7 @@ return {
 		vim.g.undotree_SplitWidth = 40
 	end,
 	keys = {
-		{'<leader>u', ':UndotreeToggle<CR>'},
+		{ '<leader>u', ':UndotreeToggle<CR>' },
 	},
-	config = function() end -- END Config function 
+	config = function() end
 }

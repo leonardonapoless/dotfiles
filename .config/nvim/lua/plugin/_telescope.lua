@@ -3,19 +3,23 @@ local km = vim.keymap.set
 return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    lazy =  false,
+    lazy = false,
     priority = 100,
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
+    },
     config = function()
-
         local actions = require('telescope.actions')
         local action_state = require('telescope.actions.state')
-        require('telescope').setup{
+        local telescope = require('telescope')
 
+        telescope.setup {
             defaults = {
                 mappings = {
-
                     i = {
+                        ["<C-j>"] = actions.move_selection_next,
+                        ["<C-k>"] = actions.move_selection_previous,
                         ["<C-y>"] = function(prompt_bufnr)
                             local selection = action_state.get_selected_entry()
                             actions.close(prompt_bufnr)
@@ -24,17 +28,24 @@ return {
                         ["<M-q>"] = 'send_selected_to_qflist',
                         ["<C-Q>"] = 'send_to_qflist',
                     },
-
                     n = {
                         ["<M-q>"] = 'send_selected_to_qflist',
                         ["<C-Q>"] = 'send_to_qflist',
                     }
-
                 },
-            }, -- End
+            },
+            extensions = {
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown {
+                        initial_mode = "normal",
+                    }
+                }
+            }
         }
 
-        -- Transparency Polish: Remove Telescope Backgrounds
+        telescope.load_extension("ui-select")
+
+        -- Transparency
         vim.api.nvim_create_autocmd("ColorScheme", {
             pattern = "*",
             callback = function()
@@ -50,13 +61,16 @@ return {
             end,
         })
 
-        km("n", "<leader>ff", 	":Telescope find_files<CR>") 	-- finds a file and opens it
-        km("n", "<leader>fl", 	":Telescope live_grep<CR>") 	-- finds files that contain the search
-        km("n", "<leader>fm", 	":Telescope marks<CR>") 		-- finds <<MARKS>>
-        km("n", "<leader>fr", 	":Telescope registers<CR>") 	-- lets you select a register
-        km("n", "<leader>fb", 	":Telescope buffers<CR>") 		-- finds and opens a buffer
+        km("n", "<leader>ff", ":Telescope find_files<CR>")
+        km("n", "<leader>fl", ":Telescope live_grep<CR>")
+        km("n", "<leader>fm", ":Telescope marks<CR>")
+        km("n", "<leader>fr", ":Telescope registers<CR>")
+        km("n", "<leader>fb", ":Telescope buffers<CR>")
 
-        km("n", "<leader>fh", 	":Telescope current_buffer_fuzzy_find<CR>") 		-- finds files that contain a ripgrep match
+        km("n", "<leader>gb", ":Telescope git_branches<CR>")
+        km("n", "<leader>gc", ":Telescope git_commits<CR>")
+        km("n", "<leader>gs", ":Telescope git_status<CR>")
 
+        km("n", "<leader>fh", ":Telescope current_buffer_fuzzy_find<CR>")
     end
 }

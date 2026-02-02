@@ -4,18 +4,18 @@
 
 ---
 
-## 🔑 The Leader Key
+## The Leader Key
 
 The **leader key** is `Space`. It's your shortcut prefix.
 
 - `Space` then `w` = Save file
 - `Space` then `ff` = Find files
 
-**💡 Press `Space` and wait** → popup shows ALL shortcuts!
+**Press `Space` and wait** → popup shows ALL shortcuts!
 
 ---
 
-## ⌨️ Notation
+## Notation
 
 | Notation | Key |
 |----------|-----|
@@ -25,20 +25,34 @@ The **leader key** is `Space`. It's your shortcut prefix.
 
 ---
 
-## 📁 Files & Navigation
+## Files & Navigation
 
 | Keys | Action |
 |------|--------|
 | `Space ff` | Find files (fuzzy search) |
-| `Space fl` | Find in files (grep) |
+| `Space fl` | Live grep (search text in files) |
 | `Space fb` | Find open buffers |
-| `Space pv` | Toggle file tree |
+| `Space fm` | Find marks |
+| `Space fr` | Find registers |
+| `Space fh` | Fuzzy find in current buffer |
+| `Space pv` | Open virtual file tree (Netrw) |
+| `-` | Open file tree (Oil) |
+| `Space vp` | Open file tree (Oil) |
 | `Space ex` | Open Finder at project |
 | `Space hex` | Open Finder at current file |
 
+### Advanced Navigation (Oil + Telescope)
+
+| Keys | Action |
+|------|--------|
+| `Space pg` | Open Oil at path from clipboard |
+| `Space pwc` | Copy current folder path to clipboard |
+| `Space =` | Go to folder (Telescope -> Oil) |
+| `Space -` | Go to file's folder (Telescope -> Oil) |
+
 ---
 
-## 💾 Save & Quit
+## Save & Quit
 
 | Keys | Action |
 |------|--------|
@@ -46,10 +60,11 @@ The **leader key** is `Space`. It's your shortcut prefix.
 | `Space W` | Save all files |
 | `Space bd` | Close buffer |
 | `:qa!` | Quit all (no save) |
+| `:QA` | Quit all |
 
 ---
 
-## 🔖 Harpoon (Quick Files)
+## Harpoon (Quick Files)
 
 | Keys | Action |
 |------|--------|
@@ -61,7 +76,7 @@ The **leader key** is `Space`. It's your shortcut prefix.
 
 ---
 
-## 📑 Tabs
+## Tabs
 
 | Keys | Action |
 |------|--------|
@@ -73,32 +88,36 @@ The **leader key** is `Space`. It's your shortcut prefix.
 
 ---
 
-## 🪟 Windows
+## Windows
 
 | Keys | Action |
 |------|--------|
-| `Ctrl+w v` | Vertical split |
-| `Ctrl+w s` | Horizontal split |
+| `Ctrl+w v` / `Space \|` | Vertical split |
+| `Ctrl+w s` / `Space -` | Horizontal split (Note: `Space -` also mapped to Telescope->Oil in Oil config, checking priority) |
 | `Ctrl+w h/j/k/l` | Navigate windows |
-| `Ctrl+w q` | Close window |
+| `Ctrl+w q` / `Space q` | Close window |
 | `Opt+h/j/k/l` | Navigate windows (alt) |
+| `Ctrl+h/j/k/l` | Fast window navigation |
 
 ---
 
-## 📋 Clipboard
+## Clipboard
 
 | Keys | Action |
 |------|--------|
 | `Space y` | Yank to system clipboard |
 | `Space p` | Paste from system clipboard |
 | `Space yy` | Yank line to clipboard |
+| `Space Y` | Yank to end of line to clipboard |
+| `Space yp` | Copy file path |
+| `Space yn` | Copy file name |
 | `Y` (visual) | Yank to clipboard |
 | `P` | Paste from clipboard |
 | `Ctrl+v` (insert) | Paste in insert mode |
 
 ---
 
-## 🧠 LSP (Code Intelligence)
+## LSP (Code Intelligence)
 
 | Keys | Action |
 |------|--------|
@@ -122,36 +141,55 @@ The **leader key** is `Space`. It's your shortcut prefix.
 
 ### Diagnostics
 
-| Keys | Action |
-|------|--------|
-| `[d` | Previous diagnostic |
-| `]d` | Next diagnostic |
-| `Space ld` | Show diagnostic |
+| Keys       | Action                       |
+|------------|------------------------------|
+| `[d`       | Previous diagnostic          |
+| `]d`       | Next diagnostic              |
+| `Space ld` | Show diagnostic              |
 | `Space le` | Buffer diagnostics (Trouble) |
-| `Space lE` | All diagnostics (Trouble) |
+| `Space lE` | All diagnostics (Trouble)    |
 
 ---
 
-## 🐛 Debugging (DAP)
+## Git & GitHub Integration
 
-| Keys | Action |
-|------|--------|
-| `Space dc` | Start/Continue |
-| `Space dn` | Step **n**ext (over) |
-| `Space di` | Step **i**nto |
-| `Space do` | Step **o**ut |
-| `Space db` | Toggle **b**reakpoint |
-| `Space dB` | Conditional breakpoint |
-| `Space du` | Toggle debug **U**I |
-| `Space dr` | Open **R**EPL |
-| `Space ds` | **S**top debugging |
-| `Space dp` | **P**ause |
+> [Read the Git Workflow Guide](./GIT_WORKFLOW.md)
+
+| Keys       | Action                          |
+|------------|---------------------------------|
+| `Space gg` | **Neogit** (Status/Dashboard)   |
+| `Space gd` | **Diffview** (Open Diff)        |
+| `Space gh` | **Diffview** (File History)     |
+| `Space gb` | **Telescope** (Switch Branch)   |
+| `Space gc` | **Telescope** (Checkout Commit) |
+| `Space gs` | **Telescope** (Git Status)      |
+| `Space gi` | **GitHub** (List Issues)        |
+| `Space gp` | **GitHub** (List PRs)           |
+| `Space gr` | **GitHub** (Search Repo)        |
+| `Space g`  | *See popup for more*            |
+
+---
+
+## Debugging (DAP)
+
+| Keys       | Action                   |
+|------------|--------------------------|
+| `Space dc` | Start/Continue           |
+| `Space dn` | Step **n**ext (over)     |
+| `Space di` | Step **i**nto            |
+| `Space do` | Step **o**ut             |
+| `Space db` | Toggle **b**reakpoint    |
+| `Space dB` | Conditional breakpoint   |
+| `Space du` | Toggle debug **U**I      |
+| `Space dr` | Open **R**EPL            |
+| `Space ds` | **S**top debugging       |
+| `Space dp` | **P**ause                |
 
 *F5/F10/F11/F12 also work (require fn key on MacBook)*
 
 ---
 
-## 🔧 Completion (Just Start Typing!)
+## Completion (Just Start Typing!)
 
 Completions appear **automatically** as you type.
 
@@ -169,18 +207,19 @@ Completions appear **automatically** as you type.
 
 ---
 
-## 🔍 Search
+## Search
 
 | Keys | Action |
 |------|--------|
-| `*` | Search word under cursor |
-| `Space /` | Search & replace |
+| `*` | Search word under cursor (no jump) |
+| `Space /` | Search & replace last search |
 | `Space Space` | Clear highlight |
 | `Space rr` | Remove trailing spaces |
+| `Space <CR>` | Show notification history (Snacks) |
 
 ---
 
-## ✏️ Editing Shortcuts
+## Editing Shortcuts
 
 | Keys | Action |
 |------|--------|
@@ -189,10 +228,14 @@ Completions appear **automatically** as you type.
 | `ga` | Select all |
 | `Ctrl+d` | Half page down (centered) |
 | `Ctrl+u` | Half page up (centered) |
+| `Space bi` | Block indent |
+| `Space cc` | Add comment prefix |
+| `Space cr` | Remove comment prefix |
+| `Space x` | Surround selection |
 
 ---
 
-## 🔤 Spell Check
+## Spell Check
 
 | Keys | Action |
 |------|--------|
@@ -205,17 +248,19 @@ Completions appear **automatically** as you type.
 
 ---
 
-## 📺 Terminal
+## Terminal
 
 | Keys | Action |
 |------|--------|
 | `Space ter` | Open terminal split |
 | `Space tew` | Open Warp at project |
+| `Space htew` | Open Warp at file |
+| `Space new` | Open new Neovim instance in Warp |
 | `Ctrl+Space` | Exit terminal mode |
 
 ---
 
-## 🆘 Misc
+## Misc
 
 | Keys | Action |
 |------|--------|

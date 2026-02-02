@@ -5,7 +5,6 @@ return {
     config = function()
         require('nvim-web-devicons').setup({
             default = true,
-            -- Override to force specific icons and brighter colors for Gruvbox
             override = {
                 ["swift"] = {
                     icon = "",
@@ -76,7 +75,7 @@ return {
                     icon = "",
                     color = "#dea584",
                     name = "Rs"
-                }, 
+                },
                 ["toml"] = {
                     icon = "",
                     color = "#9c4221",

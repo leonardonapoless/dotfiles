@@ -5,6 +5,7 @@
 ## Quick Start
 
 After opening Neovim, run:
+
 ```vim
 :Lazy sync
 :MasonInstall
@@ -15,7 +16,7 @@ After opening Neovim, run:
 
 ## Supported Languages
 
-### ✅ Auto-Configured (Mason)
+### Auto Configured
 
 These LSP servers are auto-installed by Mason:
 
@@ -33,6 +34,7 @@ These LSP servers are auto-installed by Mason:
 | Bash | bashls | ✓ |
 | C/C++ | clangd | ✓ |
 | Java | jdtls | ✓ |
+| GLSL | glsl_analyzer | ✓ |
 
 ### ⚙️ Manual Setup Required
 
@@ -41,12 +43,14 @@ These LSP servers are auto-installed by Mason:
 Swift uses `sourcekit-lsp` which comes with Xcode.
 
 **Install:**
+
 ```bash
 # Install Xcode Command Line Tools
 xcode-select --install
 ```
 
 **Verify:**
+
 ```bash
 sourcekit-lsp --help
 ```
@@ -58,6 +62,7 @@ No additional configuration needed - the LSP is auto-configured.
 Odin uses `ols` (Odin Language Server).
 
 **Install:**
+
 ```bash
 # Clone and build
 git clone --recursive https://github.com/DanielGaworski/ols.git
@@ -68,12 +73,14 @@ export PATH="$HOME/ols:$PATH"
 ```
 
 **Or via Homebrew (if available):**
+
 ```bash
 brew tap odin-lang/odin
 brew install ols
 ```
 
 **Verify:**
+
 ```bash
 ols --help
 ```
@@ -89,6 +96,7 @@ All parsers are auto-installed on first use. To manually install:
 ```
 
 To update all parsers:
+
 ```vim
 :TSUpdate
 ```
@@ -102,6 +110,7 @@ To update all parsers:
 Uses `codelldb` (auto-installed by Mason).
 
 **Usage:**
+
 1. Build your project with debug symbols (`-g` flag)
 2. Set breakpoint with `<Space>db`
 3. Start debugging with `<F5>`
@@ -112,6 +121,7 @@ Uses `codelldb` (auto-installed by Mason).
 Uses `js-debug-adapter` (auto-installed by Mason).
 
 **Usage:**
+
 1. Set breakpoint with `<Space>db`
 2. Start debugging with `<F5>`
 3. Select launch configuration
@@ -132,6 +142,7 @@ IndentWidth: 4
 ### JavaScript/TypeScript
 
 Install prettier:
+
 ```bash
 npm install -g prettier
 ```
@@ -158,6 +169,7 @@ Uses swift-format (included with Xcode).
 ### Server missing
 
 Install manually:
+
 ```vim
 :MasonInstall <server-name>
 ```

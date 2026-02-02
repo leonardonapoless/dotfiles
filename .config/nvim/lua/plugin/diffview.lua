@@ -1,11 +1,11 @@
-
 return {
     'sindrets/diffview.nvim',
     config = function()
         vim.cmd("command! Diff DiffviewOpen")
     end,
     keys = {
-        {'<leader>nd', ':DiffviewOpen<cr>', mode = 'n'}
+        { '<leader>gd', ':DiffviewOpen<cr>',        mode = 'n', desc = "Diffview: Open Diff" },
+        { '<leader>gh', ':DiffviewFileHistory<cr>', mode = 'n', desc = "Diffview: File History" },
     },
     cmd = {
         "DiffviewOpen",

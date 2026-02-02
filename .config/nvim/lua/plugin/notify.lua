@@ -4,7 +4,7 @@ return {
     priority = 1000,
     config = function()
         local notify = require("notify")
-        
+
         notify.setup({
             -- "fade", "slide", "fade_in_slide_out", "static"
             stages = "fade_in_slide_out",
@@ -25,10 +25,10 @@ return {
             },
             background_colour = "#000000",
         })
-        
+
         -- Force transparent background by linking to Normal
         vim.api.nvim_set_hl(0, "NotifyBackground", { link = "Normal" })
-        
+
         -- Override vim.notify
         vim.notify = notify
     end,

@@ -1,7 +1,6 @@
-
 return {
 	"folke/lazydev.nvim",
-	dependencies = {'hrsh7th/nvim-cmp'},
+	dependencies = { 'hrsh7th/nvim-cmp' },
 	ft = "lua", -- only load on lua files
 	opts = {
 		library = {
@@ -25,7 +24,7 @@ return {
 			-- Needs `LelouchHe/xmake-luals-addon` to be installed
 			{ path = "xmake-luals-addon/library", files = { "xmake.lua" } },
 
-			]]--
+			]] --
 		},
 		integrations = {
 			cmp = true,
