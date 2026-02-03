@@ -12,7 +12,7 @@ end
 
 return {
     -- Metal bootstrap with MTKView
-    s("mtl_bootstrap", {
+    s({ trig = "mtl_bootstrap", name = "Metal Bootstrap", dscr = "Standard MTKView setup", priority = 1000 }, {
         t({ "#import <Metal/Metal.h>", "#import <MetalKit/MetalKit.h>", "#import <Cocoa/Cocoa.h>", "", "@interface " }),
         i(1, "MetalRenderer"),
         t({ " : NSObject <MTKViewDelegate>", "@property (nonatomic, strong) id<MTLDevice> device;",
@@ -34,7 +34,7 @@ return {
     }),
 
     -- Metal render pipeline
-    s("mtl_pipeline", {
+    s({ trig = "mtl_pipeline", name = "Render Pipeline", dscr = "Render pipeline setup" }, {
         t({ "id<MTLLibrary> library = [self.device newDefaultLibrary];",
             "id<MTLFunction> vertexFunction = [library newFunctionWithName:@\"" }),
         i(1, "vertexShader"),
@@ -53,7 +53,7 @@ return {
     }),
 
     -- MSL vertex shader
-    s("msl_vertex", {
+    s({ trig = "msl_vertex", name = "MSL Vertex", dscr = "Metal Shading Language Vertex Shader", priority = 900 }, {
         t({ "#include <metal_stdlib>", "using namespace metal;", "", "struct VertexIn {",
             "    float3 position [[attribute(0)]];", "    " }),
         i(1, "float4 color [[attribute(1)]];"),
@@ -67,16 +67,17 @@ return {
     }),
 
     -- MSL fragment shader
-    s("msl_fragment", {
-        t({ "#include <metal_stdlib>", "using namespace metal;", "", "fragment float4 " }),
-        i(1, "fragmentShader"),
-        t({ "(float4 color [[stage_in]]) {", "    " }),
-        i(0, "return color;"),
-        t({ "", "}" }),
-    }),
+    s({ trig = "msl_fragment", name = "MSL Fragment", dscr = "Metal Shading Language Fragment Shader", priority = 900 },
+        {
+            t({ "#include <metal_stdlib>", "using namespace metal;", "", "fragment float4 " }),
+            i(1, "fragmentShader"),
+            t({ "(float4 color [[stage_in]]) {", "    " }),
+            i(0, "return color;"),
+            t({ "", "}" }),
+        }),
 
     -- MSL compute kernel
-    s("msl_compute", {
+    s({ trig = "msl_compute", name = "MSL Compute", dscr = "Metal Shading Language Compute Kernel", priority = 900 }, {
         t({ "#include <metal_stdlib>", "using namespace metal;", "", "kernel void " }),
         i(1, "computeKernel"),
         t({ "(device float* input [[buffer(0)]],", " device float* output [[buffer(1)]],",
@@ -86,7 +87,7 @@ return {
     }),
 
     -- Metal texture
-    s("mtl_texture", {
+    s({ trig = "mtl_texture", name = "Metal Texture", dscr = "Texture descriptor setup" }, {
         t({ "MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];",
             "textureDescriptor.pixelFormat = " }),
         c(1, { t("MTLPixelFormatRGBA8Unorm"), t("MTLPixelFormatBGRA8Unorm") }),
@@ -99,7 +100,7 @@ return {
     }),
 
     -- Metal vertex buffer (Objective-C)
-    s("mtl_vertex", {
+    s({ trig = "mtl_vertex", name = "Vertex Buffer", dscr = "Vertex buffer with struct" }, {
         t({ "typedef struct {", "    vector_float3 position;", "    vector_float4 color;", "} " }),
         i(1, "Vertex"),
         t({ ";", "", "static const " }),
@@ -116,7 +117,7 @@ return {
     }),
 
     -- Metal depth/stencil state
-    s("mtl_depth", {
+    s({ trig = "mtl_depth", name = "Depth Stencil", dscr = "Depth stencil descriptor" }, {
         t({ "MTLDepthStencilDescriptor *depthDescriptor = [[MTLDepthStencilDescriptor alloc] init];",
             "depthDescriptor.depthCompareFunction = " }),
         c(1, { t("MTLCompareFunctionLess"), t("MTLCompareFunctionLessEqual"), t("MTLCompareFunctionGreater") }),
@@ -124,11 +125,11 @@ return {
         c(2, { t("YES"), t("NO") }),
         t({ ";", "",
             "id<MTLDepthStencilState> depthState = [self.device newDepthStencilStateWithDescriptor:depthDescriptor];",
-            "[renderEncoder setDepthStencilState:depthState];" }),
+            "    [renderEncoder setDepthStencilState:depthState];" }),
     }),
 
     -- Metal MSAA
-    s("mtl_msaa", {
+    s({ trig = "mtl_msaa", name = "MSAA Setup", dscr = "Multisample Anti-Aliasing" }, {
         t({ "pipelineDescriptor.sampleCount = " }),
         c(1, { t("4"), t("2"), t("8") }),
         t({ ";", "",
@@ -145,7 +146,7 @@ return {
     }),
 
     -- Metal compute pipeline
-    s("mtl_compute_pipeline", {
+    s({ trig = "mtl_compute_pipeline", name = "Compute Pipeline", dscr = "Compute pipeline setup" }, {
         t({ "id<MTLLibrary> library = [self.device newDefaultLibrary];",
             "id<MTLFunction> computeFunction = [library newFunctionWithName:@\"" }),
         i(1, "computeKernel"),

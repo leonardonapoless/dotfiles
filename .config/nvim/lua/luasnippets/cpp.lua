@@ -25,7 +25,7 @@ end
 
 return {
     -- Main with includes
-    s("main", fmt([[
+    s({ trig = "main", name = "Main", dscr = "Standard main function", priority = 1000 }, fmt([[
         #include <iostream>
 
         int main(int argc, char* argv[])
@@ -36,7 +36,7 @@ return {
     ]], { i(0) })),
 
     -- Class with auto header guard and filename
-    s("class", fmt([[
+    s({ trig = "class", name = "Class", dscr = "Class with constructor/destructor", priority = 900 }, fmt([[
         class {}
         {{
         public:
@@ -57,7 +57,7 @@ return {
     })),
 
     -- Header file with guard
-    s("header", fmt([[
+    s({ trig = "header", name = "Header Guard", dscr = "Include guard logic", priority = 800 }, fmt([[
         #ifndef {}
         #define {}
 
@@ -72,7 +72,7 @@ return {
     })),
 
     -- Namespace with auto-detection
-    s("namespace", fmt([[
+    s({ trig = "namespace", name = "Namespace", dscr = "Namespace block" }, fmt([[
         namespace {}
         {{
         {}
@@ -84,14 +84,14 @@ return {
     })),
 
     -- Smart pointer with choice
-    s("unique", fmt([[
+    s({ trig = "unique", name = "std::unique_ptr", dscr = "Make unique pointer" }, fmt([[
         auto {} = std::make_unique<{}>({}); ]], {
         i(1, "ptr"),
         i(2, "Type"),
         i(3, "args")
     })),
 
-    s("shared", fmt([[
+    s({ trig = "shared", name = "std::shared_ptr", dscr = "Make shared pointer" }, fmt([[
         auto {} = std::make_shared<{}>({}); ]], {
         i(1, "ptr"),
         i(2, "Type"),
@@ -99,7 +99,7 @@ return {
     })),
 
     -- Range-based for loop with auto type
-    s("forr", fmt([[
+    s({ trig = "forr", name = "For Range", dscr = "Range-based for loop" }, fmt([[
         for (auto& {} : {}) {{
             {}
         }}
@@ -110,7 +110,7 @@ return {
     })),
 
     -- Lambda with choice for capture
-    s("lambda", fmt([[
+    s({ trig = "lambda", name = "Lambda", dscr = "Lambda expression" }, fmt([[
         auto {} = [{}]({}){} {{
             {}
         }};
@@ -123,7 +123,7 @@ return {
     })),
 
     -- Template function
-    s("template", fmt([[
+    s({ trig = "template", name = "Template Func", dscr = "Template function" }, fmt([[
         template<typename {}>
         {} {}({})
         {{
@@ -138,7 +138,7 @@ return {
     })),
 
     -- Rule of 5 with class name
-    s("rule5", fmt([[
+    s({ trig = "rule5", name = "Class (Rule of 5)", dscr = "Copy/Move Constructors & Assignments" }, fmt([[
         class {}
         {{
         public:
@@ -166,7 +166,7 @@ return {
     })),
 
     -- RAII wrapper
-    s("raii", fmt([[
+    s({ trig = "raii", name = "RAII Class", dscr = "Resource Acquisition Is Initialization" }, fmt([[
         class {}
         {{
         public:
@@ -209,7 +209,7 @@ return {
     })),
 
     -- Thread with lambda
-    s("thread", fmt([[
+    s({ trig = "thread", name = "std::thread", dscr = "Thread with lambda" }, fmt([[
         std::thread {}([{}]() {{
             {}
         }});
@@ -223,7 +223,7 @@ return {
     })),
 
     -- Mutex with lock guard
-    s("mutex", fmt([[
+    s({ trig = "mutex", name = "Mutex Lock", dscr = "std::lock_guard block" }, fmt([[
         std::mutex {};
         std::lock_guard<std::mutex> {}({});
         {}
@@ -235,7 +235,7 @@ return {
     })),
 
     -- constexpr with auto return type
-    s("constexpr", fmt([[
+    s({ trig = "constexpr", name = "Constexpr Func", dscr = "Constexpr function" }, fmt([[
         constexpr auto {}({}) -> {}
         {{
             return {};
@@ -248,7 +248,7 @@ return {
     })),
 
     -- Concept (C++20)
-    s("concept", fmt([[
+    s({ trig = "concept", name = "Concept", dscr = "C++20 Concept definition" }, fmt([[
         template<typename {}>
         concept {} = requires({} {}) {{
             {{ {}.{}() }} -> std::convertible_to<{}>;
@@ -264,13 +264,14 @@ return {
     })),
 
     -- Smart cout with variable
-    s("cout", fmt('std::cout << "{} = " << {} << std::endl;', {
-        rep(1),
-        i(1, "variable")
-    })),
+    s({ trig = "cout", name = "std::cout", dscr = "Print variable to stdout" },
+        fmt('std::cout << "{} = " << {} << std::endl;', {
+            rep(1),
+            i(1, "variable")
+        })),
 
     -- Timer/benchmark
-    s("timer", fmt([[
+    s({ trig = "timer", name = "Benchmark Timer", dscr = "Measure execution time" }, fmt([[
         auto {} = std::chrono::high_resolution_clock::now();
         {}
         auto {} = std::chrono::high_resolution_clock::now();
@@ -287,7 +288,7 @@ return {
     })),
 
     -- Optional with pattern matching
-    s("optional", fmt([[
+    s({ trig = "optional", name = "std::optional", dscr = "Optional check and usage" }, fmt([[
         std::optional<{}> {} = {};
         if ({}.has_value()) {{
             auto {} = {}.value();
@@ -304,7 +305,7 @@ return {
     })),
 
     -- Variant with visitor
-    s("variant", fmt([[
+    s({ trig = "variant", name = "std::variant", dscr = "Variant with std::visit" }, fmt([[
         std::variant<{}> {} = {};
         std::visit([](auto&& arg) {{
             using T = std::decay_t<decltype(arg)>;

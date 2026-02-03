@@ -13,7 +13,7 @@ end
 
 return {
     -- OpenGL GLFW bootstrap with error handling
-    s("gl_bootstrap", fmt([[
+    s({ trig = "gl_bootstrap", name = "OpenGL Bootstrap", dscr = "GLFW window setup", priority = 1000 }, fmt([[
         #include <stdio.h>
         #include <stdlib.h>
         #define GL_SILENCE_DEPRECATION
@@ -73,7 +73,7 @@ return {
     })),
 
     -- VAO/VBO with interleaved data
-    s("gl_vao", fmt([[
+    s({ trig = "gl_vao", name = "VAO Setup", dscr = "Vertex Array Object loop" }, fmt([[
         GLuint VAO, VBO;
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
@@ -98,7 +98,7 @@ return {
     })),
 
     -- Complete shader program with error checking
-    s("gl_shader", fmt([[
+    s({ trig = "gl_shader", name = "Shader Program", dscr = "Compile & Link Shaders", priority = 900 }, fmt([[
         const char* {}VertexShaderSource = R"(
             #version {} core
             layout (location = 0) in vec3 aPos;
@@ -171,7 +171,7 @@ return {
     })),
 
     -- Texture loading with stb_image
-    s("gl_texture", fmt([[
+    s({ trig = "gl_texture", name = "Texture Load", dscr = "Load texture (stb_image)" }, fmt([[
         #define STB_IMAGE_IMPLEMENTATION
         #include "stb_image.h"
 
@@ -209,7 +209,7 @@ return {
     })),
 
     -- Framebuffer for offscreen rendering
-    s("gl_fbo", fmt([[
+    s({ trig = "gl_fbo", name = "Framebuffer", dscr = "Offscreen FBO setup" }, fmt([[
         GLuint fbo;
         glGenFramebuffers(1, &fbo);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -242,7 +242,7 @@ return {
     })),
 
     -- MVP matrices with GLM
-    s("gl_mvp", fmt([[
+    s({ trig = "gl_mvp", name = "MVP Matrix", dscr = "Model-View-Projection (GLM)" }, fmt([[
         #include <glm/glm.hpp>
         #include <glm/gtc/matrix_transform.hpp>
         #include <glm/gtc/type_ptr.hpp>
@@ -287,7 +287,7 @@ return {
     })),
 
     -- GLSL vertex shader
-    s("glsl_vertex", fmt([[
+    s({ trig = "glsl_vertex", name = "GLSL Vertex", dscr = "Vertex Shader structure", priority = 900 }, fmt([[
         #version {} core
 
         layout (location = 0) in vec3 aPos;
@@ -314,7 +314,7 @@ return {
     })),
 
     -- GLSL fragment shader with lighting
-    s("glsl_fragment", fmt([[
+    s({ trig = "glsl_fragment", name = "GLSL Fragment", dscr = "Fragment Shader structure", priority = 900 }, fmt([[
         #version {} core
 
         in vec3 FragPos;
