@@ -24,58 +24,14 @@ return {
         require('luasnip.loaders.from_vscode').lazy_load({
             paths = { vim.fn.stdpath('config') .. '/snippets' }
         })
+        -- Load Lua snippets from lua/luasnippets
+        require("luasnip.loaders.from_lua").lazy_load({
+            paths = { vim.fn.stdpath("config") .. "/lua/luasnippets" }
+        })
 
         -- Custom Snippets (Manual definitions to ensure availability)
-        local ls = require('luasnip')
-        local s = ls.snippet
-        local t = ls.text_node
-        local i = ls.insert_node
-        local fmt = require("luasnip.extras.fmt").fmt
+        -- Swift snippets are now loaded from lua/luasnippets/swift.lua via luasnip lua loader
 
-        ls.add_snippets("swift", {
-            -- Protocol
-            s("protocol", fmt(
-                [[
-protocol {} {{
-    {}
-}}
-                ]], { i(1, "Name"), i(0) }
-            )),
-
-            -- Extension
-            s("ext", fmt(
-                [[
-extension {} {{
-    {}
-}}
-                ]], { i(1, "Type"), i(0) }
-            )),
-
-            -- Class
-            s("class", fmt(
-                [[
-class {} {{
-    {}
-}}
-                ]], { i(1, "Name"), i(0) }
-            )),
-
-            -- Struct
-            s("struct", fmt(
-                [[
-struct {} {{
-    {}
-}}
-                ]], { i(1, "Name"), i(0) }
-            )),
-
-            -- Guard
-            s("guard", fmt(
-                [[
-guard {} else {{ return {} }}
-                ]], { i(1, "condition"), i(0) }
-            )),
-        })
 
         cmp.setup({
             snippet = {
@@ -120,46 +76,18 @@ guard {} else {{ return {} }}
             }),
 
             formatting = {
-                format = function(entry, vim_item)
-                    local kind_icons = {
-                        Text = "",
-                        Method = "󰆧",
-                        Function = "󰊕",
-                        Constructor = "",
-                        Field = "󰇽",
-                        Variable = "󰂡",
-                        Class = "󰠱",
-                        Interface = "",
-                        Module = "",
-                        Property = "󰜢",
-                        Unit = "",
-                        Value = "󰎠",
-                        Enum = "",
-                        Keyword = "󰌋",
-                        Snippet = "",
-                        Color = "󰏘",
-                        File = "󰈙",
-                        Reference = "",
-                        Folder = "󰉋",
-                        EnumMember = "",
-                        Constant = "󰏿",
-                        Struct = "",
-                        Event = "",
-                        Operator = "󰆕",
-                        TypeParameter = "󰅲",
-                    }
-                    -- Kind icons
-                    vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind] or "", vim_item.kind)
-                    -- Source
-                    vim_item.menu = ({
+                format = lspkind.cmp_format({
+                    mode = 'symbol_text',  -- show symbol and text
+                    maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                    ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+                    menu = ({
                         buffer = "[Buffer]",
                         nvim_lsp = "[LSP]",
                         luasnip = "[LuaSnip]",
                         nvim_lua = "[Lua]",
                         latex_symbols = "[LaTeX]",
-                    })[entry.source.name]
-                    return vim_item
-                end,
+                    })
+                }),
             },
 
             window = {

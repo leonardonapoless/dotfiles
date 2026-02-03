@@ -21,7 +21,8 @@ end
 
 return {
     -- JUCE AudioProcessor with auto class name
-    s("juce_processor", fmt([[
+    s({ trig = "juce_processor", name = "JUCE Processor", dscr = "AudioProcessor class generator", priority = 1000 },
+        fmt([[
         class {}AudioProcessor : public juce::AudioProcessor
         {{
         public:
@@ -58,14 +59,16 @@ return {
             JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR({}AudioProcessor)
         }};
     ]], {
-        f(plugin_name, {}),
-        rep(1), rep(1),
-        i(0, "// Private members"),
-        rep(1)
-    })),
+            f(plugin_name, {}),
+            rep(1), rep(1),
+            i(0, "// Private members"),
+            rep(1)
+        })),
 
     -- JUCE processBlock with optimizations
-    s("juce_processblock", fmt([[
+    s(
+    { trig = "juce_processblock", name = "Process Block", dscr = "Standard processBlock implementation", priority = 900 },
+        fmt([[
         void {}AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer,
                                                           juce::MidiBuffer& midiMessages)
         {{
@@ -88,12 +91,12 @@ return {
             }}
         }}
     ]], {
-        f(plugin_name, {}),
-        i(0, "// Process sample")
-    })),
+            f(plugin_name, {}),
+            i(0, "// Process sample")
+        })),
 
     -- JUCE APVTS with parameter
-    s("juce_apvts", fmt([[
+    s({ trig = "juce_apvts", name = "APVTS Params", dscr = "AudioProcessorValueTreeState Setup" }, fmt([[
         juce::AudioProcessorValueTreeState apvts {{
             *this, nullptr, "Parameters",
             {{
@@ -105,7 +108,7 @@ return {
     })),
 
     -- JUCE Slider with attachment
-    s("juce_slider", fmt([[
+    s({ trig = "juce_slider", name = "Slider Attach", dscr = "Slider with APVTS attachment" }, fmt([[
         juce::Slider {}Slider;
         std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> {}Attachment;
 
@@ -127,7 +130,7 @@ return {
     })),
 
     -- JUCE Component with paint and resized
-    s("juce_component", fmt([[
+    s({ trig = "juce_component", name = "Component", dscr = "Custom Component skeleton", priority = 900 }, fmt([[
         class {} : public juce::Component
         {{
         public:
@@ -158,7 +161,7 @@ return {
     })),
 
     -- JUCE Timer
-    s("juce_timer", fmt([[
+    s({ trig = "juce_timer", name = "Timer Component", dscr = "Component with TimerMixin" }, fmt([[
         class {} : public juce::Component, public juce::Timer
         {{
         public:
