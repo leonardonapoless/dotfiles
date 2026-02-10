@@ -70,3 +70,6 @@ require("lazy").setup({
 })
 
 require('checks')
+
+-- Apply saved theme (noir by default, <leader>tt to toggle)
+require('colorscheme').apply_saved_theme()
