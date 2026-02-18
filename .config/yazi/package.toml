@@ -1,5 +1,17 @@
-[plugin]
-deps = []
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "25918dc"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "4506f9d"
+hash = "4761fffb60a12d37096c34a356380cdf"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "25918dc"
+hash = "384464b6df8cb807425c521f8cd790f3"
 
 [[flavor.deps]]
 use = "bennyyip/gruvbox-dark"
