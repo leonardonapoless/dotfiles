@@ -286,8 +286,8 @@ return {
                 -- Detect frameworks by scanning head of file
                 local lines = vim.fn.readfile(file, '', 50)
                 local content = table.concat(lines, '\n')
-                local compile_flags = { '-O3', '-march=native', '-ffast-math' } -- Performance!
-                local link_flags = {}
+                local compile_flags = { '-O3', '-march=native', '-ffast-math', '-I/opt/homebrew/include' } -- Performance!
+                local link_flags = { '-L/opt/homebrew/lib' }
 
                 -- Math is almost always needed
                 table.insert(link_flags, '-lm')

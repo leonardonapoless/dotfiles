@@ -351,4 +351,53 @@ return {
     ]], {
         c(1, { t("410"), t("330"), t("150") })
     })),
+
+    -- ImGui GLFW + OpenGL3 Bootstrap
+    s({ trig = "gl_imgui", name = "ImGui Setup", dscr = "ImGui boilerplate for GLFW+OpenGL3", priority = 1000 }, fmt([[
+        #include "imgui.h"
+        #include "imgui_impl_glfw.h"
+        #include "imgui_impl_opengl3.h"
+
+        // Setup Dear ImGui context
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+
+        // Setup Dear ImGui style
+        ImGui::StyleColorsDark();
+
+        // Setup Platform/Renderer backends
+        const char* glsl_version = "#version 150"; // Adjust depending on OpenGL version
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init(glsl_version);
+
+        // --- RENDER LOOP ---
+        // ImGui_ImplOpenGL3_NewFrame();
+        // ImGui_ImplGlfw_NewFrame();
+        // ImGui::NewFrame();
+        //
+        // {}
+        //
+        // ImGui::Render();
+        // ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        //
+        // if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        // {{
+        //     GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        //     ImGui::UpdatePlatformWindows();
+        //     ImGui::RenderPlatformWindowsDefault();
+        //     glfwMakeContextCurrent(backup_current_context);
+        // }}
+
+        // --- CLEANUP ---
+        // ImGui_ImplOpenGL3_Shutdown();
+        // ImGui_ImplGlfw_Shutdown();
+        // ImGui::DestroyContext();
+    ]], {
+        i(0, "ImGui::ShowDemoWindow();")
+    })),
 }

@@ -111,6 +111,11 @@ return {
                             usePlaceholders = true,
                             completeUnimported = true,
                             clangdFileStatus = true,
+                            fallbackFlags = {
+                                "-std=c++17",
+                                "-I/opt/homebrew/include",
+                                "-L/opt/homebrew/lib"
+                            },
                         },
                     })
                 end,
