@@ -6,6 +6,18 @@ return {
     config = function()
         local toggleterm = require('toggleterm')
 
+        -- Auto-enter insert mode when entering a terminal window
+        vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter", "BufEnter" }, {
+            pattern = "term://*",
+            callback = function()
+                vim.schedule(function()
+                    if vim.bo.buftype == "terminal" then
+                        vim.cmd("startinsert")
+                    end
+                end)
+            end,
+        })
+
         toggleterm.setup({
             size = 12,
             -- open_mapping = [[<C-\>]], -- Disabled to prevent conflict with custom runner logic
@@ -50,13 +62,15 @@ return {
                 runner:open()
             end
 
-            -- Focus the terminal window
+            -- Send command and focus the terminal window
             vim.defer_fn(function()
-                if runner.window and vim.api.nvim_win_is_valid(runner.window) then
-                    vim.api.nvim_set_current_win(runner.window)
-                    vim.cmd('startinsert!')
-                end
                 runner:send('clear && ' .. cmd, true)
+                vim.defer_fn(function()
+                    if runner.window and vim.api.nvim_win_is_valid(runner.window) then
+                        vim.api.nvim_set_current_win(runner.window)
+                        vim.cmd('startinsert!')
+                    end
+                end, 50)
             end, 100)
         end
 
