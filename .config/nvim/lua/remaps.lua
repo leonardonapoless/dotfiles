@@ -198,7 +198,7 @@ local function split_window_controls()
     km("n", "<C-w>=", "<C-w>7+", { desc = "Increase window height" })
     km("n", "<C-w>-", "<C-w>7-", { desc = "Decrease window height" })
 
-    -- Option key alternatives
+    -- Option key alternatives (Linux / Windows / Modded Mac)
     km("n", "<M-w>", "<C-w>", { desc = "Window command prefix" })
     km("n", "<M-,>", "<C-w>7<", { desc = "Decrease window width" })
     km("n", "<M-.>", "<C-w>7>", { desc = "Increase window width" })
@@ -210,6 +210,23 @@ local function split_window_controls()
     km("n", "<M-j>", function() vim.cmd.wincmd('j') end, { desc = "Window down" })
     km("n", "<M-k>", function() vim.cmd.wincmd('k') end, { desc = "Window up" })
     km("n", "<M-l>", function() vim.cmd.wincmd('l') end, { desc = "Window right" })
+
+    -- Mac Option key actual character alternatives (US Layout)
+    km("n", "∑", "<C-w>", { desc = "Window prefix (Mac Option+w)" })
+    km("n", "≤", "<C-w>7<", { desc = "Decrease window width (Mac Option+,)" })
+    km("n", "≥", "<C-w>7>", { desc = "Increase window width (Mac Option+.)" })
+    km("n", "≠", "<C-w>7+", { desc = "Increase window height (Mac Option+=)" })
+    km("n", "–", "<C-w>7-", { desc = "Decrease window height (Mac Option+-)" })
+
+    km("n", "˙", function() vim.cmd.wincmd('h') end, { desc = "Window left (Mac Option+h)" })
+    km("n", "∆", function() vim.cmd.wincmd('j') end, { desc = "Window down (Mac Option+j)" })
+    km("n", "˚", function() vim.cmd.wincmd('k') end, { desc = "Window up (Mac Option+k)" })
+    km("n", "¬", function() vim.cmd.wincmd('l') end, { desc = "Window right (Mac Option+l)" })
+
+    -- Mac specific Command mappings (for GUI / Neovide / Alacritty)
+    km({ "n", "v", "i", "c" }, "<D-v>", "<C-R>+", { desc = "Paste (Mac Cmd-V)" })
+    km({ "n", "v", "i" }, "<D-s>", "<Esc><cmd>w<CR>", { desc = "Save (Mac Cmd-S)" })
+    km("v", "<D-c>", '"+y', { desc = "Copy (Mac Cmd-C)" })
 
     -- Control key alternatives
     km("n", "<C-w>h", function() vim.cmd.wincmd('h') end, { desc = "Window left" })
