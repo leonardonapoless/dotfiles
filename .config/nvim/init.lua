@@ -58,6 +58,7 @@ require("lazy").setup({
 	require('plugin.notify'),
 	require('plugin.noice'),
 	require('plugin.lualine'),
+    require('ui.render_markdown'),
 
 	-- Debug
 	require('plugin.dap'),
