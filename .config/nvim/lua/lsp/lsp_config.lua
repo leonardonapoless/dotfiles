@@ -197,13 +197,8 @@ return {
             },
         })
 
-        -- Rounded borders for hover and signature help
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-            vim.lsp.handlers.hover, { border = 'rounded' }
-        )
-        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-            vim.lsp.handlers.signature_help, { border = 'rounded' }
-        )
+        -- Note: vim.lsp.with() is deprecated in Nvim 0.12.
+        -- Borders are now configured by passing opts to vim.lsp.buf.hover({ border = 'rounded' })
 
         -- On LSP attach
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -222,8 +217,8 @@ return {
                 map('gt', vim.lsp.buf.type_definition, 'Go to Type Definition')
 
                 -- Documentation
-                map('K', vim.lsp.buf.hover, 'Hover Documentation')
-                map('<C-k>', vim.lsp.buf.signature_help, 'Signature Help', 'i')
+                map('K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, 'Hover Documentation')
+                map('<C-k>', function() vim.lsp.buf.signature_help({ border = 'rounded' }) end, 'Signature Help', 'i')
 
                 -- Actions
                 map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
