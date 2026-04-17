@@ -20,8 +20,16 @@ return {
                 'msg',
                 'prompt',
                 'terminal',
-                'quickfix'
+                'quickfix',
+                'toggleterm'
             },
+            condition = function(bufnr)
+                local filetype = vim.bo[bufnr].filetype
+                if filetype and filetype:match('^snacks_') then
+                    return false
+                end
+                return true
+            end,
         }
     end
 }

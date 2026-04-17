@@ -139,8 +139,8 @@ local function quality_of_life()
 
 
     -- Remove trailing whitespace
-    km("n", "<leader>rr", [[:%s/\v(^[ \t]+$)|([ \t]+$)//g|noh<CR>]], { desc = "Remove trailing spaces" })
-    km("v", "<leader>rr", [[<Esc>:'<,'>s/[ \t]\+$//g|noh<CR>]], { desc = "Remove trailing spaces (selection)" })
+    km("n", "<leader>cw", [[:%s/\v(^[ \t]+$)|([ \t]+$)//g|noh<CR>]], { desc = "Remove trailing spaces" })
+    km("v", "<leader>cw", [[<Esc>:'<,'>s/[ \t]\+$//g|noh<CR>]], { desc = "Remove trailing spaces (selection)" })
 
     -- Escape alternatives
     -- km({'n','v','i'}, "<C-[>", function() vim.api.nvim_feedkeys("\x1b", "t", false) end,

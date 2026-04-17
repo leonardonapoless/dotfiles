@@ -175,7 +175,7 @@ return {
                     'echo "Building..."',
                     '# Try "make run" first if available',
                     'if grep -q "^run:" Makefile 2>/dev/null || grep -q "^run:" makefile 2>/dev/null; then',
-                    '  source ~/.zshrc >/dev/null 2>&1 # source env just in case',
+                    '  source ~/.zshrc >/dev/null 2>&1 || true # source env safely',
                     '  make run',
                     'else',
                     '  make -j$(sysctl -n hw.ncpu 2>/dev/null || nproc)',
@@ -326,7 +326,7 @@ return {
 
                 if string.find(content, '<GLUT/glut.h>') or string.find(content, '<GL/glut.h>') then
                     table.insert(link_flags, '-framework GLUT -framework OpenGL')
-                    table.insert(compile_flags, '-Wno-deprecated')
+                    table.insert(compile_flags, '-Wno-deprecated-declarations')
                 end
 
                 if string.find(content, '<OpenGL/') and not string.find(content, 'GLUT') then
@@ -401,7 +401,7 @@ return {
                     local ents = {
                         ['main.swift'] = 'swift',
                         ['main.c'] = 'clang -o /tmp/out main.c && /tmp/out',
-                        ['main.cpp'] = 'clang++ -std=c++17 -o /tmp/out main.cpp && /tmp/out',
+                        ['main.cpp'] = 'clang++ -std=c++17 -Wno-deprecated-declarations -framework GLUT -framework OpenGL -o /tmp/out main.cpp && /tmp/out',
                         ['main.py'] = 'python3',
                         ['index.js'] = 'node',
                         ['index.ts'] = 'bun'
