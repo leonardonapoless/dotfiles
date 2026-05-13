@@ -68,6 +68,7 @@ return {
             "clangd",
             "jdtls",
             "glsl_analyzer",
+            "asm_lsp",
         }
 
         mason_lspconfig.setup({
@@ -114,7 +115,9 @@ return {
                             fallbackFlags = {
                                 "-std=c++17",
                                 "-I/opt/homebrew/include",
-                                "-L/opt/homebrew/lib"
+                                "-L/opt/homebrew/lib",
+                                "-DGL_SILENCE_DEPRECATION",
+                                "-F/System/Library/Frameworks",
                             },
                         },
                     })
@@ -156,6 +159,16 @@ return {
                         filetypes = { 'typescript', 'html' },
                         root_dir = function(fname)
                             return vim.fs.root(fname, { 'angular.json' }) or vim.fn.getcwd()
+                        end,
+                    })
+                end,
+
+                ["asm_lsp"] = function()
+                    lspconfig.asm_lsp.setup({
+                        capabilities = capabilities,
+                        filetypes = { "asm", "s", "S" },
+                        root_dir = function(fname)
+                            return vim.fs.root(fname, { ".git" }) or vim.fn.getcwd()
                         end,
                     })
                 end,
@@ -306,5 +319,18 @@ return {
                 end,
             })
         end
+
+        -- GLSL filetype detection
+        vim.filetype.add({
+            extension = {
+                vert = 'glsl',
+                frag = 'glsl',
+                geom = 'glsl',
+                comp = 'glsl',
+                tesc = 'glsl',
+                tese = 'glsl',
+                glsl = 'glsl',
+            },
+        })
     end,
 }

@@ -324,8 +324,11 @@ return {
                     end
                 end
 
-                if string.find(content, '<GLUT/glut.h>') or string.find(content, '<GL/glut.h>') then
+                if string.find(content, '<GLUT/glut.h>') then
                     table.insert(link_flags, '-framework GLUT -framework OpenGL')
+                    table.insert(compile_flags, '-Wno-deprecated-declarations')
+                elseif string.find(content, '<GL/glut.h>') or string.find(content, '<GL/freeglut.h>') then
+                    table.insert(link_flags, '-lglut -framework OpenGL')
                     table.insert(compile_flags, '-Wno-deprecated-declarations')
                 end
 
@@ -339,7 +342,7 @@ return {
                 end
 
                 local all_flags = table.concat(compile_flags, ' ') .. ' ' .. table.concat(link_flags, ' ')
-                run_cmd(cmd_compiler .. ' ' .. std .. ' -o /tmp/out "' .. file .. '" ' .. all_flags .. ' && /tmp/out',
+                run_cmd('cd "' .. dir .. '" && ' .. cmd_compiler .. ' ' .. std .. ' -o /tmp/out *.' .. ext .. ' ' .. all_flags .. ' && /tmp/out',
                     'Running ' .. name)
 
                 -- Typescript
@@ -400,8 +403,8 @@ return {
                 if ext == '' or vim.bo.filetype == 'oil' or vim.bo.filetype == 'netrw' then
                     local ents = {
                         ['main.swift'] = 'swift',
-                        ['main.c'] = 'clang -o /tmp/out main.c && /tmp/out',
-                        ['main.cpp'] = 'clang++ -std=c++17 -Wno-deprecated-declarations -framework GLUT -framework OpenGL -o /tmp/out main.cpp && /tmp/out',
+                        ['main.c'] = 'clang -o /tmp/out *.c && /tmp/out',
+                        ['main.cpp'] = 'clang++ -std=c++17 -Wno-deprecated-declarations -framework GLUT -framework OpenGL -o /tmp/out *.cpp && /tmp/out',
                         ['main.py'] = 'python3',
                         ['index.js'] = 'node',
                         ['index.ts'] = 'bun'

@@ -17,6 +17,9 @@ return {
                 "scss",
                 "markdown", "markdown_inline",
                 "toml", "yaml",
+                "glsl",
+                "rust",
+                "asm",
             },
 
             sync_install = false,

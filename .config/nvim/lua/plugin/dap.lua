@@ -154,6 +154,22 @@ return {
             },
         }
 
+        -- ASM Config
+        dap.configurations.asm = {
+            {
+                name = 'Launch ASM',
+                type = 'codelldb',
+                request = 'launch',
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = true,
+            },
+        }
+        dap.configurations.s = dap.configurations.asm
+        dap.configurations.S = dap.configurations.asm
+
         -- JS/TS Config
         dap.adapters['pwa-node'] = {
             type = 'server',
