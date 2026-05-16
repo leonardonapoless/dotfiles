@@ -1,6 +1,6 @@
 return {
     'nvim-treesitter/nvim-treesitter',
-    run = ":TSUpdate",
+    build = ":TSUpdate",
     lazy = false,
     dependencies = {},
     priority = 100,
@@ -10,7 +10,7 @@ return {
                 "javascript", "html", "css", "python", "go", "c", "lua",
                 "vim", "vimdoc", "query", "bash", "json",
                 "typescript", "tsx",
-                "swift",
+                -- "swift", -- Requires tree-sitter CLI > 0.26.8 (--no-bindings flag). Re-enable after `cargo install tree-sitter-cli`.
                 "cpp",
                 "odin",
                 "java",

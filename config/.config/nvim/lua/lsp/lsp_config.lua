@@ -175,15 +175,6 @@ return {
             },
         })
 
-        -- Enhanced capabilities from nvim-cmp
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        local has_cmp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
-        if has_cmp then
-            capabilities = vim.tbl_deep_extend('force', capabilities, cmp_lsp.default_capabilities())
-        end
-        -- Explicitly enable snippet support
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-
         -- Diagnostic configuration for better visibility
         vim.diagnostic.config({
             virtual_text = {

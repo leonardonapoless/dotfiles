@@ -9,7 +9,7 @@ local up = Parse_termc("<Up>")
 
 -- restart all lsp servers
 function RestartLspServers()
-	local lsp_clients = vim.lsp.get_active_clients()
+	local lsp_clients = vim.lsp.get_clients()
 	for _, client in pairs(lsp_clients) do vim.cmd("LspRestart " .. client.id); end
 	print("All lsp clients restarted")
 end

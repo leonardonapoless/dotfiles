@@ -40,6 +40,7 @@ require("lazy").setup({
 	require('lsp.lsp_config'),
 	require('lsp.cmp'),
 	require('lsp._lazydev'),
+	require('plugin.trouble'),
 	require('plugin.java'), -- nvim-jdtls
 
 	-- Git
@@ -50,7 +51,6 @@ require("lazy").setup({
 
 	-- UI
 	require('plugin.wilder'),
-	require('plugin.trouble'),
 	require('plugin.whichkey'),
 	require('ui._tabby'),
 	require('ui.nvim_web_devicons'),

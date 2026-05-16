@@ -1,0 +1,66 @@
+{
+  "ascii_abs_path": "/Users/leonardonapoles/zigfetch/apple_ascii_art/appleIIc.txt",
+  "username_hostname_color": "#007AFF",
+  "modules": [
+    {
+      "type": "os",
+      "key": "OS",
+      "key_color": "#007AFF"
+    },
+    {
+      "type": "kernel",
+      "key": "Kernel",
+      "key_color": "#007AFF"
+    },
+    {
+      "type": "uptime",
+      "key": "Uptime",
+      "key_color": "#007AFF"
+    },
+    {
+      "type": "packages",
+      "key": "Pkgs",
+      "key_color": "#FF2D55"
+    },
+    {
+      "type": "shell",
+      "key": "Shell",
+      "key_color": "#FF2D55"
+    },
+    {
+      "type": "custom",
+      "key": "-----------------------------",
+      "key_color": "#505050"
+    },
+    {
+      "type": "custom",
+      "key": "SoC\u001b[0m: Apple M4 (10) @ 4.40 GHz",
+      "key_color": "#FF9500"
+    },
+    {
+      "type": "custom",
+      "key": "GPU\u001b[0m: Apple M4 (10) @ 1.40 GHz",
+      "key_color": "#FF9500"
+    },
+    {
+      "type": "custom",
+      "key": "Memory\u001b[0m: 10.50 / 32.00 GiB (32%)",
+      "key_color": "#FF9500"
+    },
+    {
+      "type": "custom",
+      "key": "Disk\u001b[0m: 412.30 / 2000.00 GB (20%)",
+      "key_color": "#FF9500"
+    },
+    {
+      "type": "custom",
+      "key": "-----------------------------",
+      "key_color": "#505050"
+    },
+    {
+      "type": "net",
+      "key": "IP",
+      "key_color": "#34C759"
+    }
+  ]
+}
